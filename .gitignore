@@ -1,0 +1,36 @@
+# build folders
+com.galenframework.parent/bin/*
+com.galenframework.parent/target/*
+com.galenframework.parent/com.galenframework.ide/bin/*
+com.galenframework.parent/com.galenframework.ide/target/*
+com.galenframework.parent/com.galenframework.idea/bin/*
+com.galenframework.parent/com.galenframework.idea/target/*
+com.galenframework.parent/com.galenframework.tests/bin/*
+com.galenframework.parent/com.galenframework.tests/target/*
+com.galenframework.parent/com.galenframework.ui.tests/bin/*
+com.galenframework.parent/com.galenframework.ui.tests/target/*
+com.galenframework.parent/com.galenframework.ui/bin/*
+com.galenframework.parent/com.galenframework.ui/target/*
+com.galenframework.parent/com.galenframework.web/bin/*
+com.galenframework.parent/com.galenframework.web/target/*
+com.galenframework.parent/com.galenframework/bin/*
+com.galenframework.parent/com.galenframework/target/*
+samples/.metadata/*
+
+
+# Gen folders
+com.galenframework.parent/com.galenframework/model/generated/*
+com.galenframework.parent/com.galenframework.ide/src-gen/*
+com.galenframework.parent/com.galenframework.ide/xtend-gen/*
+com.galenframework.parent/com.galenframework.idea/src-gen/*
+com.galenframework.parent/com.galenframework.idea/xtend-gen/*
+com.galenframework.parent/com.galenframework.tests/src-gen/*
+com.galenframework.parent/com.galenframework.tests/xtend-gen/*
+com.galenframework.parent/com.galenframework.ui.tests/xtend-gen/*
+com.galenframework.parent/com.galenframework.ui.tests/src-gen/*
+com.galenframework.parent/com.galenframework.ui/src-gen/*
+com.galenframework.parent/com.galenframework.ui/xtend-gen/*
+com.galenframework.parent/com.galenframework.web/src-gen/*
+com.galenframework.parent/com.galenframework.web/xtend-gen/*
+com.galenframework.parent/com.galenframework/src-gen/*
+com.galenframework.parent/com.galenframework/xtend-gen/*
