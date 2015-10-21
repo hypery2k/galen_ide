@@ -8,7 +8,7 @@
 	</parent>
 	<artifactId>com.galenframework.web</artifactId>
 	<packaging>war</packaging>
-
+	
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<resources>

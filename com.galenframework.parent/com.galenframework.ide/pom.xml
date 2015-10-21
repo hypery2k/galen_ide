@@ -13,6 +13,7 @@
 		<dependency>
 			<artifactId>com.galenframework</artifactId>
 			<groupId>com.galenframework</groupId>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 
@@ -21,7 +22,7 @@
 			<plugin>
 				<groupId>org.eclipse.xtend</groupId>
 				<artifactId>xtend-maven-plugin</artifactId>
-				<version>${project.version}</version>
+				<version>${xtextVersion}</version>
 			</plugin>
 		</plugins>
 	</build>
