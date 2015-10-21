@@ -1,0 +1,15 @@
+language: java
+
+sudo: false
+
+
+before_script:
+  - export MAVEN_SKIP_RC=true
+  - export MAVEN_OPTS="-Xmx512m -XX:MaxPermSize=512m"
+  - "export PATH=`pwd`/bin:$PATH"
+  - echo $HOME
+
+jdk:
+  - oraclejdk7
+
+script: mvn clean verify
