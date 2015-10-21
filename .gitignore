@@ -9,9 +9,12 @@
 # build folders
 com.galenframework.parent/bin/*
 com.galenframework.parent/target/*
+com.galenframework.parent/com.galenframework/build/*
 com.galenframework.parent/com.galenframework.ide/bin/*
+com.galenframework.parent/com.galenframework.ide/build/
 com.galenframework.parent/com.galenframework.ide/target/*
 com.galenframework.parent/com.galenframework.idea/bin/*
+com.galenframework.parent/com.galenframework.idea/build/*
 com.galenframework.parent/com.galenframework.idea/target/*
 com.galenframework.parent/com.galenframework.tests/bin/*
 com.galenframework.parent/com.galenframework.tests/target/*
@@ -24,7 +27,8 @@ com.galenframework.parent/com.galenframework.web/target/*
 com.galenframework.parent/com.galenframework/bin/*
 com.galenframework.parent/com.galenframework/target/*
 samples/.metadata/*
-
+com.galenframework.parent/com.galenframework.target/.classpath
+com.galenframework.parent/.gradle/*
 
 # Gen folders
 com.galenframework.parent/com.galenframework/model/generated/*
@@ -42,5 +46,3 @@ com.galenframework.parent/com.galenframework.web/src-gen/*
 com.galenframework.parent/com.galenframework.web/xtend-gen/*
 com.galenframework.parent/com.galenframework/src-gen/*
 com.galenframework.parent/com.galenframework/xtend-gen/*
-
-com.galenframework.parent/com.galenframework.target/.classpath
