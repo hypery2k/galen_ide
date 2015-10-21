@@ -1,10 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="src-gen"/>
-	<classpathentry kind="src" path="xtend-gen"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/com.galenframework"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/com.galenframework.ide"/>
-	<classpathentry kind="output" path="bin"/>
+  <classpathentry kind="src" path="src"/>
+  <classpathentry kind="src" path="src-gen"/>
+  <classpathentry kind="src" path="xtend-gen" including="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="var" path="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar" sourcepath="M2_REPO/javax/inject/javax.inject/1/javax.inject-1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/servlet/javax.servlet-api/3.1.0/javax.servlet-api-3.1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.jar" sourcepath="M2_REPO/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2-sources.jar"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="var" path="M2_REPO/com/galenframework/com.galenframework/1.0.0-SNAPSHOT/com.galenframework-1.0.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/galenframework/com.galenframework.ide/1.0.0-SNAPSHOT/com.galenframework.ide-1.0.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/xtext/org.eclipse.xtext.xbase.web/2.9.0.beta5/org.eclipse.xtext.xbase.web-2.9.0.beta5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/xtext/org.eclipse.xtext.web/2.9.0.beta5/org.eclipse.xtext.web-2.9.0.beta5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/log4j/log4j/1.2.17/log4j-1.2.17.jar" sourcepath="M2_REPO/log4j/log4j/1.2.17/log4j-1.2.17-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/xtext/org.eclipse.xtext.ide/2.9.0.beta5/org.eclipse.xtext.ide-2.9.0.beta5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/xtext/org.eclipse.xtext/2.9.0.beta5/org.eclipse.xtext-2.9.0.beta5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/xtext/org.eclipse.xtext.util/2.9.0.beta5/org.eclipse.xtext.util-2.9.0.beta5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/guava/guava/14.0.1/guava-14.0.1.jar" sourcepath="M2_REPO/com/google/guava/guava/14.0.1/guava-14.0.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/inject/guice/3.0/guice-3.0.jar" sourcepath="M2_REPO/com/google/inject/guice/3.0/guice-3.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0.jar" sourcepath="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.ecore/2.11.0-v20150123-0347/org.eclipse.emf.ecore-2.11.0-v20150123-0347.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.common/2.11.0-v20150123-0347/org.eclipse.emf.common-2.11.0-v20150123-0347.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/xtend/org.eclipse.xtend.lib/2.9.0.beta5/org.eclipse.xtend.lib-2.9.0.beta5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/xtext/org.eclipse.xtext.xbase.lib/2.9.0.beta5/org.eclipse.xtext.xbase.lib-2.9.0.beta5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/xtend/org.eclipse.xtend.lib.macro/2.9.0.beta5/org.eclipse.xtend.lib.macro-2.9.0.beta5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.ecore.xmi/2.11.0-v20150123-0347/org.eclipse.emf.ecore.xmi-2.11.0-v20150123-0347.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/ibm/icu/icu4j/52.1/icu4j-52.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/antlr/antlr-runtime/3.2/antlr-runtime-3.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/xtext/org.eclipse.xtext.common.types/2.9.0.beta5/org.eclipse.xtext.common.types-2.9.0.beta5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.codegen/2.10.0-v20150123-0452/org.eclipse.emf.codegen-2.10.0-v20150123-0452.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm-commons/5.0.1/asm-commons-5.0.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm-tree/5.0.1/asm-tree-5.0.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm/5.0.1/asm-5.0.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.mwe2.lib/2.8.1/org.eclipse.emf.mwe2.lib-2.8.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/common/3.6.200-v20130402-1505/common-3.6.200-v20130402-1505.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/xtext/org.eclipse.xtext.xbase.ide/2.9.0.beta5/org.eclipse.xtext.xbase.ide-2.9.0.beta5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/xtext/org.eclipse.xtext.xbase/2.9.0.beta5/org.eclipse.xtext.xbase-2.9.0.beta5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/xtext/org.eclipse.xtext.web.servlet/2.9.0.beta5/org.eclipse.xtext.web.servlet-2.9.0.beta5.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/code/gson/gson/2.3.1/gson-2.3.1.jar" sourcepath="M2_REPO/com/google/code/gson/gson/2.3.1/gson-2.3.1-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/webjars/requirejs/2.1.17/requirejs-2.1.17.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/webjars/jquery/2.1.4/jquery-2.1.4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/webjars/ace/1.1.9/ace-1.1.9.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-annotations/9.2.11.v20150529/jetty-annotations-9.2.11.v20150529.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-plus/9.2.11.v20150529/jetty-plus-9.2.11.v20150529.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-webapp/9.2.11.v20150529/jetty-webapp-9.2.11.v20150529.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-xml/9.2.11.v20150529/jetty-xml-9.2.11.v20150529.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-util/9.2.11.v20150529/jetty-util-9.2.11.v20150529.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-util/9.2.11.v20150529/jetty-util-9.2.11.v20150529-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-servlet/9.2.11.v20150529/jetty-servlet-9.2.11.v20150529.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-security/9.2.11.v20150529/jetty-security-9.2.11.v20150529.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-server/9.2.11.v20150529/jetty-server-9.2.11.v20150529.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-http/9.2.11.v20150529/jetty-http-9.2.11.v20150529.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-io/9.2.11.v20150529/jetty-io-9.2.11.v20150529.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-io/9.2.11.v20150529/jetty-io-9.2.11.v20150529-sources.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-jndi/9.2.11.v20150529/jetty-jndi-9.2.11.v20150529.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-simple/1.7.12/slf4j-simple-1.7.12.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.7.12/slf4j-api-1.7.12.jar" sourcepath="M2_REPO/org/slf4j/slf4j-api/1.7.12/slf4j-api-1.7.12-sources.jar"/>
 </classpath>
