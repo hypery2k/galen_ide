@@ -1,0 +1,64 @@
+@objects
+  navbar css .navbar-header
+  navbar-item-*		css .navbar-collapse .nav li 
+  menubar-left		.sidebar-left
+  header 			.bs-docs-header
+  content			.bs-docs-container
+  header-container	.bs-docs-header .container
+  bootstrap-logo		span.bs-docs-booticon
+  
+  
+@import simple.spec
+  
+# common layout checks
+= Overall layout =
+  content:
+    visible
+  navbar:
+   visible
+  content:
+    below navbar 370 to 410 px
+
+  = navigation =
+  
+   @on mobile
+     navigation-item-*:
+       absent
+  
+   @on deskop
+     navigation-item-*:
+       visible  
+       
+      
+  = Content should fit to screen size =
+  
+   @on mobile
+     content:
+       width 100% of screen/width
+  
+   @on deskop
+     content:
+       width 80 to 90% of screen/width 
+
+# concrete layout tests
+
+= Bootstrap logo should be visible =
+
+= Header =
+    header:
+        height 100px
+
+    = User info =
+        login-link:
+            height 30px
+
+        register-link:
+            right-of login-link 10 to 30px
+
+
+= Main section =
+    main-section:
+        below header 0 to 5px
+        inside screen 0px left right
+  bootstrap-logo:
+    visible
