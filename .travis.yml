@@ -12,4 +12,6 @@ before_script:
 jdk:
   - oraclejdk7
 
-script: mvn clean verify
+script:
+  - cd com.galenframework.parent
+  - mvn clean verify
