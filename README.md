@@ -4,7 +4,7 @@ Vote on [`Kickstarter`](https://www.kickstarter.com/projects/1453417775/plugins-
 
 > Integration for Web, Eclipse and IDEA development environement for the [GalenFramework](http://galenframework.com)
 
-[![Build Status](https://travis-ci.org/hypery2k/galen_ide.svg?branch=master)](https://travis-ci.org/hypery2k/galen_ide)
+[![Build Status](https://travis-ci.org/hypery2k/galen_ide.svg?branch=master)](https://travis-ci.org/hypery2k/galen_ide) [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=mreinhardt&url=https://github.com/hypery2k/galen_ide&title=badges&language=&tags=github&category=software)
 
 
 ## Try it out
