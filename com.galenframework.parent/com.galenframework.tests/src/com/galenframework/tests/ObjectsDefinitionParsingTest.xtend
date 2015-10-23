@@ -19,8 +19,33 @@ class ObjectsDefinitionParsingTest {
 	@Inject
 	ParseHelper<Model> parseHelper;
 
+
+    // NEGATIVE TESTS
 	@Test
-	def void loadOneObjectWithComment() {
+	def void shouldNotloadObjectFromEmptyObjectDefinition() {
+		val result = parseHelper.parse('''
+			# objects
+			@objects
+		''')
+		Assert.assertNotNull(result)
+		Assert.assertNull(result.objectSection.objects)
+	}
+	
+	@Test
+	def void shouldNotloadObjectFromInvalidObjectDefinition() {
+		val result = parseHelper.parse('''
+			# objects
+			@objects
+			s
+		''')
+		Assert.assertNotNull(result)
+		Assert.assertNull(result.objectSection.objects)
+	}
+
+
+	// POSITIVE TESTS
+	@Test
+	def void shouldLoadOneObjectWithComment() {
 		val result = parseHelper.parse('''
 			# objects
 			@objects
@@ -36,7 +61,7 @@ class ObjectsDefinitionParsingTest {
 	}
 
 	@Test
-	def void loadOneObjectWithoutType() {
+	def void shouldLoadOneObjectWithoutType() {
 		val result = parseHelper.parse('''
 			@objects
 			  navbar  .navbar-header
@@ -51,7 +76,7 @@ class ObjectsDefinitionParsingTest {
 	}
 
 	@Test
-	def void loadOneObjectWithType() {
+	def void shouldLoadOneObjectWithType() {
 		val result = parseHelper.parse('''
 			@objects
 			  navbar css .navbar-header
@@ -66,7 +91,7 @@ class ObjectsDefinitionParsingTest {
 	}
 
 	@Test
-	def void loadMultipleObject2() {
+	def void shouldLoadMultipleObject2() {
 		val result = parseHelper.parse('''
 			@objects
 			  navbar css .navbar-header
@@ -92,7 +117,7 @@ class ObjectsDefinitionParsingTest {
 	}
 
 	@Test
-	def void loadMultipleObject() {
+	def void shouldLoadMultipleObject() {
 		val result = parseHelper.parse('''
 			@objects
 			  navbar .navbar-header
@@ -122,7 +147,7 @@ class ObjectsDefinitionParsingTest {
 	}
 
 	@Test
-	def void loadMultipleObjectWithIndent() {
+	def void shouldLoadMultipleObjectWithIndent() {
 		val result = parseHelper.parse('''
 			@objects
 			  navbar .navbar-header
