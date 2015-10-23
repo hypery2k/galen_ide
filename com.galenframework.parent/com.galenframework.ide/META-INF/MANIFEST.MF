@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: com.galenframework.ide
-Bundle-Vendor: My Company
+Bundle-Name: Galen Specs Language Support IDE
+Bundle-Vendor: Martin Reinhardt
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: com.galenframework.ide; singleton:=true
 Bundle-ActivationPolicy: lazy

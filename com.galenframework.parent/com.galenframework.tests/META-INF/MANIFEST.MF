@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: com.galenframework.tests
-Bundle-Vendor: My Company
+Bundle-Name: Galen Specs Language Support Tests
+Bundle-Vendor: Martin Reinhardt
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: com.galenframework.tests; singleton:=true
 Bundle-ActivationPolicy: lazy

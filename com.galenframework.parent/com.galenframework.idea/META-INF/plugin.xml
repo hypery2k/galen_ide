@@ -1,11 +1,11 @@
 <idea-plugin version="2" xmlns:xi="http://www.w3.org/2001/XInclude">
 	<id>com.galenframework.idea</id>
-	<name>Spec Support</name>
+	<name>Galen Specs Language Support</name>
 	<description>
-      This plugin enables smart editing of Spec files.
+      This plugin enables smart editing of Layout Specifications for the Galenframework
 	</description>
 	<version>1.0.0</version>
-	<vendor>My Company</vendor>
+	<vendor>Martin Reinhardt</vendor>
 
 	<idea-version since-build="131"/>
 	<depends>org.eclipse.xtext.idea</depends>

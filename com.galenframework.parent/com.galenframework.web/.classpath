@@ -32,7 +32,8 @@
   <classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm-commons/5.0.1/asm-commons-5.0.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm-tree/5.0.1/asm-tree-5.0.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm/5.0.1/asm-5.0.1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.mwe2.lib/2.8.1/org.eclipse.emf.mwe2.lib-2.8.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.mwe2.lib/2.8.2/org.eclipse.emf.mwe2.lib-2.8.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.mwe2.runtime/2.8.2/org.eclipse.emf.mwe2.runtime-2.8.2.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/common/3.6.200-v20130402-1505/common-3.6.200-v20130402-1505.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/xtext/org.eclipse.xtext.xbase.ide/2.9.0.beta5/org.eclipse.xtext.xbase.ide-2.9.0.beta5.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/eclipse/xtext/org.eclipse.xtext.xbase/2.9.0.beta5/org.eclipse.xtext.xbase-2.9.0.beta5.jar"/>

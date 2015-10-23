@@ -2,9 +2,11 @@
 .settings/*
 .classpath
 
-# Eclipse Core
+# Eclipse files
 .project
 
+# IDEA files
+.idea
 
 # build folders
 com.galenframework.parent/bin/*
@@ -46,3 +48,4 @@ com.galenframework.parent/com.galenframework.web/src-gen/*
 com.galenframework.parent/com.galenframework.web/xtend-gen/*
 com.galenframework.parent/com.galenframework/src-gen/*
 com.galenframework.parent/com.galenframework/xtend-gen/*
+
