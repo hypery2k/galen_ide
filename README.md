@@ -6,6 +6,23 @@ Vote on [`Kickstarter`](https://www.kickstarter.com/projects/1453417775/plugins-
 
 [![Build Status](https://travis-ci.org/hypery2k/galen_ide.svg?branch=master)](https://travis-ci.org/hypery2k/galen_ide)
 
+
+## Try it out
+
+
+### Eclipse
+Download [Xtext Eclipse Beta](https://www.eclipse.org/Xtext/news.html#download-links) and copy the [latest plugins](https://github.com/hypery2k/galen_ide/releases/latest) into the dropins folder:
+![](docs/screenshots/eclipse.png)
+
+
+### IDEA
+```bash
+cd com.galenframework.parent
+cd com.galenframework.idea
+./gradlew runIdea
+````
+![](docs/screenshots/idea.png)
+
 ## Dev instructions
 
 For local setup use [Xtext 2.9.0beta5](https://www.eclipse.org/modeling/tmf/downloads/?showAll=1&hlbuild=S201510020259&project=xtext#S201510020259) or above and clone this repository.
