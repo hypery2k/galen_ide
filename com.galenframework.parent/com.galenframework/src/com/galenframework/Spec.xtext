@@ -47,7 +47,10 @@ ComplexSpecsReference:
 	('width' ('<' | '>') (Integer 'px' | 'screen/width@'));
 
 Element returns Element:
-	name=ID (type=('id' | 'xpath' | 'css'))? selector=Selector ('\n' | '\r');
+	name=ID (type=('id' | 'xpath' | 'css'))? selector=Selector ('\n' | '\r')
+	(BEGIN
+	(elements+=Element)+
+	END)?;
 
 Selector returns ecore::EString:
 	('.' | '//' | '#')? (QualifiedName | '[' | ']' | '@' | '*' | '=' | '\'' | '"') Selector?;
@@ -75,7 +78,7 @@ terminal NL:
 
 	// Single line comment
 terminal SL_COMMENT:
-	'#' WS+ !('\n' | '\r')*;
+	'#' WS !('\n' | '\r')*;
 
 	// The following synthetic tokens are used for the indentation-aware blocks
 terminal BEGIN:

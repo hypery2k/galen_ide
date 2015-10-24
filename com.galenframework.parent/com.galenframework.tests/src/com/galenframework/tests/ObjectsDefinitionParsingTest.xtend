@@ -42,6 +42,20 @@ class ObjectsDefinitionParsingTest {
 		Assert.assertNull(result.objectSection.objects)
 	}
 
+	@Test
+	def void shouldNotLoadAllObjectWithMixedIndentation() {
+		val result = parseHelper.parse('''
+			@objects
+			   navbar  .navbar-header
+			  navbar  .navbar-header
+			  	 navbar  .navbar-header
+		''')
+		Assert.assertNotNull(result)
+		Assert.assertNotNull(result.objectSection.objects)
+		val objects = result.objectSection.objects.elements
+		Assert.assertTrue("Should read two object definitions, but was " + objects.size, objects.size == 2)
+	}
+
 
 	// POSITIVE TESTS
 	@Test
