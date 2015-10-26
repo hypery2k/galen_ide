@@ -30,9 +30,9 @@ class SpecParsingTest {
 			    visible
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objectSection.objects)
+		Assert.assertNotNull(result.objects)
 		Assert.assertNotNull(result.layoutCheckSection)
-		val objects = result.objectSection.objects.elements
+		val objects = result.objects.elements
 		val sections = result.layoutCheckSection
 		Assert.assertTrue("Should read one object definition, but was " + objects.size, objects.size == 1)
 		Assert.assertTrue("Should read one object layout check section, but was " + sections.size, sections.size == 1)

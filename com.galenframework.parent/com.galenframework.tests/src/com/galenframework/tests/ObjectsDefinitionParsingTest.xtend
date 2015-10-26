@@ -28,7 +28,7 @@ class ObjectsDefinitionParsingTest {
 			@objects
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNull(result.objectSection.objects)
+		Assert.assertNull(result.objects)
 	}
 	
 	@Test
@@ -39,7 +39,7 @@ class ObjectsDefinitionParsingTest {
 			s
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNull(result.objectSection.objects)
+		Assert.assertNull(result.objects)
 	}
 
 	@Test
@@ -51,8 +51,8 @@ class ObjectsDefinitionParsingTest {
 			  	 navbar  .navbar-header
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objectSection.objects)
-		val objects = result.objectSection.objects.elements
+		Assert.assertNotNull(result.objects)
+		val objects = result.objects.elements
 		Assert.assertTrue("Should read two object definitions, but was " + objects.size, objects.size == 2)
 	}
 
@@ -66,8 +66,8 @@ class ObjectsDefinitionParsingTest {
 			  navbar  .navbar-header
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objectSection.objects)
-		val objects = result.objectSection.objects.elements
+		Assert.assertNotNull(result.objects)
+		val objects = result.objects.elements
 		Assert.assertTrue("Should read one object definition, but was " + objects.size, objects.size == 1)
 		val object = objects.get(0)
 		Assert.assertTrue("Should read CSS selector type, but was " + object.selector,
@@ -81,8 +81,8 @@ class ObjectsDefinitionParsingTest {
 			  navbar  .navbar-header
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objectSection.objects)
-		val objects = result.objectSection.objects.elements
+		Assert.assertNotNull(result.objects)
+		val objects = result.objects.elements
 		Assert.assertTrue("Should read one object definition, but was " + objects.size, objects.size == 1)
 		val object = objects.get(0)
 		Assert.assertTrue("Should read CSS selector type, but was " + object.selector,
@@ -96,8 +96,8 @@ class ObjectsDefinitionParsingTest {
 			  navbar css .navbar-header
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objectSection.objects)
-		val objects = result.objectSection.objects.elements
+		Assert.assertNotNull(result.objects)
+		val objects = result.objects.elements
 		Assert.assertTrue("Should read one object definition, but was " + objects.size, objects.size == 1)
 		val object = objects.get(0)
 		Assert.assertTrue("Should read CSS selector type, but was " + object.selector,
@@ -113,8 +113,8 @@ class ObjectsDefinitionParsingTest {
 			  navbar-* #navbar-header
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objectSection.objects)
-		val objects = result.objectSection.objects.elements
+		Assert.assertNotNull(result.objects)
+		val objects = result.objects.elements
 		Assert.assertTrue(
 			"Should read three object definitions, but was " + objects.size,
 			objects.size == 3
@@ -140,8 +140,8 @@ class ObjectsDefinitionParsingTest {
 			  navbar-* #navbar-header
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objectSection.objects)
-		val objects = result.objectSection.objects.elements
+		Assert.assertNotNull(result.objects)
+		val objects = result.objects.elements
 		Assert.assertTrue(
 			"Should read four object definitions, but was " + objects.size,
 			objects.size == 4
@@ -166,12 +166,12 @@ class ObjectsDefinitionParsingTest {
 			@objects
 			  navbar .navbar-header
 			  navbar-* #navbar-header
-			    navbar2 xpath //*[@data-attr=navbar-header]
-			  navbar-* #navbar-header
+			    navbar2 xpath //*[@data-attr=navbar2-header]
+			  navbar3-* #navbar3-header
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objectSection.objects)
-		val objects = result.objectSection.objects.elements
+		Assert.assertNotNull(result.objects)
+		val objects = result.objects.elements
 		Assert.assertTrue(
 			"Should read four object definitions, but was " + objects.size,
 			objects.size == 4

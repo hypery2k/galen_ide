@@ -3,12 +3,9 @@ import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 generate spec "http://www.galenframework.com/Spec"
 
 Model:
-	objectSection=Object
+	'@objects' objects=ObjectDeclaration
 	importSection+=Import*
 	layoutCheckSection+=Section*;
-
-Object:
-	'@objects' objects=ObjectDeclaration;
 
 ObjectDeclaration:
 	BEGIN
@@ -48,9 +45,7 @@ ComplexSpecsReference:
 
 Element returns Element:
 	name=ID (type=('id' | 'xpath' | 'css'))? selector=Selector ('\n' | '\r')
-	(BEGIN
-	(elements+=Element)+
-	END)?;
+	(children=ObjectDeclaration)?;
 
 Selector returns ecore::EString:
 	('.' | '//' | '#')? (QualifiedName | '[' | ']' | '@' | '*' | '=' | '\'' | '"') Selector?;
