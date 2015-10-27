@@ -36,5 +36,5 @@ Then in the repository run:
 
 ```bash
 cd com.galenframework.parent
-mvn install eclipse:eclipse
+mvn install eclipse:eclipse idea:idea -DskipTests=true
 ```
