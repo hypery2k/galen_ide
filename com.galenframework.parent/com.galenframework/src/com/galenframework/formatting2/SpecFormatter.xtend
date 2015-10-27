@@ -19,24 +19,14 @@ class SpecFormatter extends AbstractFormatter2 {
 
 	def dispatch void format(Model model, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
-		format(model.getObjectSection(), document);
+		for (Element element : model.objects.getElements()) {
+			format(element, document);
+		}
 		for (Import importSection : model.getImportSection()) {
 			format(importSection, document);
 		}
 		for (Section layoutCheckSection : model.getLayoutCheckSection()) {
 			format(layoutCheckSection, document);
-		}
-	}
-
-	def dispatch void format(com.galenframework.spec.Object object, extension IFormattableDocument document) {
-		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
-		format(object.getObjects(), document);
-	}
-
-	def dispatch void format(ObjectDeclaration objectDeclaration, extension IFormattableDocument document) {
-		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
-		for (Element elements : objectDeclaration.getElements()) {
-			format(elements, document);
 		}
 	}
 }
