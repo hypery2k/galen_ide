@@ -14,7 +14,38 @@
 			<artifactId>com.galenframework</artifactId>
 			<groupId>com.galenframework</groupId>
 			<version>${project.version}</version>
-		</dependency>
+		</dependency>		
+        <dependency>
+            <groupId>com.galenframework</groupId>
+            <artifactId>galen-java-support</artifactId>
+            <version>${galen.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.galenframework</groupId>
+            <artifactId>galen-core</artifactId>
+            <version>${galen.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-java</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.seleniumhq.selenium</groupId>
+                    <artifactId>selenium-support</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
+            <version>${selenium.version}</version>
+        </dependency>
 	</dependencies>
 
 	<build>
