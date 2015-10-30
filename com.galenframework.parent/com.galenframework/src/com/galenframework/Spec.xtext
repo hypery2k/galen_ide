@@ -31,17 +31,19 @@ Section:
 	END);
 
 SpecsReference:
+	{SpecsReference}
 	SimpleSpecsReference | ComplexSpecsReference;
 
 SimpleSpecsReference:
 	'Visible' | 'Absent';
 
 ComplexSpecsReference:
+	{ComplexSpecsReference}(
 	(('near' | 'below' | 'above') Integer 'to' Integer 'px') |
 	('aligned horizontally' ('all' | 'top' | 'bottom' | 'centered') (ref=[Element])? (Integer 'px')?) |
 	('aligned vertically' ('all' | 'left' | 'bottom' | 'right') (ref=[Element])? (Integer 'px')?) |
 	('height' ('<' | '>') (Integer 'px' | 'screen/height')) |
-	('width' ('<' | '>') (Integer 'px' | 'screen/width@'));
+	('width' ('<' | '>') (Integer 'px' | 'screen/width@')));
 
 Element returns Element:
 	name=ID (type=('id' | 'xpath' | 'css'))? selector=Selector ('\n' | '\r')
