@@ -22,11 +22,12 @@ class SpecFormatter extends AbstractFormatter2 {
 		for (Element element : model.objects.getElements()) {
 			format(element, document);
 		}
+		/*
 		for (Import importSection : model.getImportSection()) {
 			format(importSection, document);
 		}
 		for (Section layoutCheckSection : model.getLayoutCheckSection()) {
 			format(layoutCheckSection, document);
-		}
+		} */
 	}
 }

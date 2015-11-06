@@ -28,5 +28,6 @@ Export-Package: com.galenframework.parser.antlr.lexer,
  com.galenframework.spec.impl,
  com.galenframework.validation,
  com.galenframework.serializer,
- com.galenframework.parser.antlr.internal
+ com.galenframework.parser.antlr.internal,
+ com.galenframework.jvmmodel
 Import-Package: org.apache.log4j

@@ -1,11 +1,13 @@
-grammar com.galenframework.Spec hidden(SL_COMMENT, WS) // with org.eclipse.xtext.common.Terminals
+grammar com.galenframework.Spec  with org.eclipse.xtext.xbase.Xbase
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 generate spec "http://www.galenframework.com/Spec"
 
 Model:
-	'@objects' objects=ObjectDeclaration
+	'@objects' 
+	objects=ObjectDeclaration
 	importSection+=Import*
-	layoutCheckSection+=Section*;
+	layoutCheckSection+=Section*
+	;
 
 ObjectDeclaration:
 	BEGIN
@@ -13,17 +15,17 @@ ObjectDeclaration:
 	END;
 
 Import:
-	'@import' name=String;
+	'@import' name=STRING;
 
 Section:
-	'=' name=String '='
+	'=' name=STRING '='
 	ref=[Element] ':'
 	(BEGIN
 	(references+=SpecsReference)+
 	(sections+=Section)*
 	END) |
 	(BEGIN
-	'@on' name=String
+	'@on' name=STRING
 	BEGIN
 	(references+=SpecsReference)+
 	(sections+=Section)*
@@ -39,43 +41,32 @@ SimpleSpecsReference:
 
 ComplexSpecsReference:
 	{ComplexSpecsReference}(
-	(('near' | 'below' | 'above') Integer 'to' Integer 'px') |
-	('aligned horizontally' ('all' | 'top' | 'bottom' | 'centered') (ref=[Element])? (Integer 'px')?) |
-	('aligned vertically' ('all' | 'left' | 'bottom' | 'right') (ref=[Element])? (Integer 'px')?) |
-	('height' ('<' | '>') (Integer 'px' | 'screen/height')) |
-	('width' ('<' | '>') (Integer 'px' | 'screen/width@')));
+	(('near' | 'below' | 'above') INT 'to' INT 'px') |
+	('aligned horizontally' ('all' | 'top' | 'bottom' | 'centered') (ref=[Element])? (INT 'px')?) |
+	('aligned vertically' ('all' | 'left' | 'bottom' | 'right') (ref=[Element])? (INT 'px')?) |
+	('height' ('<' | '>') (INT 'px' | 'screen/height')) |
+	('width' ('<' | '>') (INT 'px' | 'screen/width@')));
 
 Element returns Element:
-	name=ID (type=('id' | 'xpath' | 'css'))? selector=Selector ('\n' | '\r')
-	(children=ObjectDeclaration)?;
+	{Element}
+	name=ID (type=('id' | 'xpath' | 'css'))? selector=Selector// EOL
+	(children=ObjectDeclaration)? ;
 
 Selector returns ecore::EString:
 	('.' | '//' | '#')? (QualifiedName | '[' | ']' | '@' | '*' | '=' | '\'' | '"') Selector?;
 
-String returns ecore::EString:
-	(WS? ID+ WS?)+;
-
-Integer returns ecore::EInt:
-	NUMBER+;
-
 QualifiedName:
 	ID ('.' ID)*;
-
-terminal NUMBER:
-	('1'..'9') ('0'..'9')*;
 
 terminal ID:
 	('a'..'z' | 'A'..'Z' | '_' | '-') ('a'..'z' | 'A'..'Z' | '_' | '-' | '*' | '0'..'9')*;
 
-terminal WS:
-	(' ' | '\t')+;
+terminal NL: ('\r'|'\n')+(' '|'\t')+;
 
-terminal NL:
-	('\r' | '\n')+ WS*;
-
-	// Single line comment
+// Single line comment
 terminal SL_COMMENT:
-	'#' WS !('\n' | '\r')*;
+	'#' WS !('\n' | '\r')* ('\r'? '\n')?;
+
 
 	// The following synthetic tokens are used for the indentation-aware blocks
 terminal BEGIN:

@@ -17,7 +17,9 @@ Require-Bundle: com.galenframework,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtend.lib,
- org.eclipse.xtext.ui.shared
+ org.eclipse.xtext.ui.shared,
+ org.eclipse.xtext.xbase.ui,
+ org.eclipse.jdt.debug.ui
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: com.galenframework.ui.contentassist,
  com.galenframework.ui.quickfix,

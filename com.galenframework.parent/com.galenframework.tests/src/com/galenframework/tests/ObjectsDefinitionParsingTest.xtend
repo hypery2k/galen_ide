@@ -168,13 +168,14 @@ class ObjectsDefinitionParsingTest {
 			  navbar-* #navbar-header
 			    navbar2 xpath //*[@data-attr=navbar2-header]
 			  navbar3-* #navbar3-header
+			  
 		''')
 		Assert.assertNotNull(result)
 		Assert.assertNotNull(result.objects)
 		val objects = result.objects.elements
 		Assert.assertTrue(
-			"Should read four object definitions, but was " + objects.size,
-			objects.size == 4
+			"Should three object definitions, but was " + objects.size,
+			objects.size == 3
 		)
 		val object1 = objects.get(0)
 		val object2 = objects.get(1)
