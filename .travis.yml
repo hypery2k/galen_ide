@@ -1,17 +1,29 @@
-language: java
-
 sudo: false
+ 
+language: java
+ 
+jdk: oraclejdk7
+ 
+cache:
+  directories:
+  - $HOME/.m2
+  
+env: DISPLAY=:99.0
+
+install: true
+ 
+addons:
+  apt:
+    packages:
+    - metacity
 
 before_script:
+  - sh -e /etc/init.d/xvfb start
+  - metacity --sm-disable --replace 2> metacity.err &
   - export MAVEN_SKIP_RC=true
   - export MAVEN_OPTS="-Xmx512m -XX:MaxPermSize=512m"
   - "export PATH=`pwd`/bin:$PATH"
   - echo $HOME
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-
-jdk:
-  - oraclejdk8
 
 script:
   - cd com.galenframework.parent
