@@ -9,8 +9,8 @@
 	<properties>
 		<tycho-version>0.23.1</tycho-version>
 		<xtextVersion>2.9.0.beta5</xtextVersion>
-        	<galen.version>2.1.2</galen.version>
-        	<selenium.version>2.48.2</selenium.version>
+		<galen.version>2.1.2</galen.version>
+		<selenium.version>2.48.2</selenium.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
@@ -96,10 +96,35 @@
 						</filesets>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-surefire-plugin</artifactId>
+					<version>${tycho-version}</version>
+					<configuration>
+						<useUIHarness>false</useUIHarness>
+						<useUIThread>true</useUIThread>
+						<argLine>-Xms40m -Xmx1G ${os-jvm-flags}</argLine>
+						<failIfNoTests>false</failIfNoTests>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
 
 	<dependencies>
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>mac</id>
+			<activation>
+				<os>
+					<family>mac</family>
+				</os>
+			</activation>
+			<properties>
+				<os-jvm-flags>-XstartOnFirstThread</os-jvm-flags>
+			</properties>
+		</profile>
+	</profiles>
 </project>
