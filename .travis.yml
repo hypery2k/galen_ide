@@ -4,14 +4,8 @@ language: java
  
 jdk: oraclejdk7
  
-cache:
-  directories:
-  - $HOME/.m2
-  
 env: DISPLAY=:99.0
 
-install: true
- 
 addons:
   apt:
     packages:
@@ -23,7 +17,6 @@ before_script:
   - export MAVEN_SKIP_RC=true
   - export MAVEN_OPTS="-Xmx512m -XX:MaxPermSize=512m"
   - "export PATH=`pwd`/bin:$PATH"
-  - echo $HOME
 
 script:
   - cd com.galenframework.parent
