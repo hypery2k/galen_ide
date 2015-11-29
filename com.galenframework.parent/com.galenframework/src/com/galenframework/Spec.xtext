@@ -49,8 +49,8 @@ ComplexSpecsReference:
 
 Element returns Element:
 	{Element}
-	name=ID (type=('id' | 'xpath' | 'css'))? selector=Selector// EOL
-	(children=ObjectDeclaration)? ;
+	name=ID (type=('id' | 'xpath' | 'css'))? selector=Selector 
+	(children=ObjectDeclaration NL)? ;
 
 Selector returns ecore::EString:
 	('.' | '//' | '#')? (QualifiedName | '[' | ']' | '@' | '*' | '=' | '\'' | '"') Selector?;

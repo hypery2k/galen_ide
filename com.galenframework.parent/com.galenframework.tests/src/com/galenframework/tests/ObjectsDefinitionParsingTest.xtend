@@ -42,7 +42,8 @@ class ObjectsDefinitionParsingTest {
 		Assert.assertNotNull(result)
 		Assert.assertNotNull(result.objects)
 		val objects = result.objects.elements
-		Assert.assertTrue("Should read two object definitions, but was " + objects.size, objects.size == 2)
+		objects.get(0).assertObject("navbar", ".navbar-header")
+		Assert.assertTrue("Should read one object definitions, but was " + objects.size, objects.size == 1)
 	}
 
 	// POSITIVE TESTS	
@@ -193,8 +194,8 @@ class ObjectsDefinitionParsingTest {
 		val object3 = objects.get(2)
 
 		object1.assertObject("navbar", ".navbar-header")
-		object2.assertObject("navbar-*", "xpath //*[@data-attr=navbar-header]")
-		object2.children.elements.get(0).assertObject("navbar2-*", "xpath", "//*[@data-attr=navbar2-header]")
+		object2.assertObject("navbar-*", "#navbar-header")
+		object2.children.elements.get(0).assertObject("navbar2", "xpath", "//*[@data-attr=navbar2-header]")
 		object3.assertObject("navbar3-*", "#navbar3-header")
 	}
 
