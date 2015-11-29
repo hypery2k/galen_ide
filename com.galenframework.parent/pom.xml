@@ -102,8 +102,8 @@
 					<artifactId>tycho-surefire-plugin</artifactId>
 					<version>${tycho-version}</version>
 					<configuration>
-						<useUIHarness>false</useUIHarness>
-						<useUIThread>true</useUIThread>
+						<useUIHarness>true</useUIHarness>
+						<useUIThread>false</useUIThread>
 						<argLine>-Xms40m -Xmx1G ${os-jvm-flags}</argLine>
 						<failIfNoTests>false</failIfNoTests>
 					</configuration>
