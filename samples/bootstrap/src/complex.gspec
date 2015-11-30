@@ -8,7 +8,7 @@
   bootstrap-logo		span.bs-docs-booticon
   
   
-@import simple.spec
+@import simple.gspec
   
 # common layout checks
 = Overall layout =

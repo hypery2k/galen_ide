@@ -28,8 +28,8 @@ class ObjectsDefinitionParsingTest {
 			@objects
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objects)
-		val objects = result.objects.elements
+		Assert.assertNotNull(result.elements)
+		val objects = result.elements
 		Assert.assertTrue("Should read no object definition, but was " + objects.size, objects.size == 0)
 	}
 
@@ -42,8 +42,8 @@ class ObjectsDefinitionParsingTest {
 			  	 navbar  .navbar-header
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objects)
-		val objects = result.objects.elements
+		Assert.assertNotNull(result.elements)
+		val objects = result.elements
 		objects.get(0).assertObject("navbar", ".navbar-header")
 		Assert.assertTrue("Should read one object definitions, but was " + objects.size, objects.size == 1)
 	}
@@ -57,8 +57,8 @@ class ObjectsDefinitionParsingTest {
 			test
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objects)
-		val objects = result.objects.elements
+		Assert.assertNotNull(result.elements)
+		val objects = result.elements
 		Assert.assertTrue("Should read object name 'test' but was" + objects.get(0).name,
 			objects.get(0).name.equalsIgnoreCase("test"))
 	}
@@ -71,8 +71,8 @@ class ObjectsDefinitionParsingTest {
 			  navbar  .navbar-header
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objects)
-		val objects = result.objects.elements
+		Assert.assertNotNull(result.elements)
+		val objects = result.elements
 		Assert.assertTrue("Should read one object definition, but was " + objects.size, objects.size == 1)
 		objects.get(0).assertObject("navbar", ".navbar-header")
 	}
@@ -84,8 +84,8 @@ class ObjectsDefinitionParsingTest {
 			  navbar  .navbar-header
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objects)
-		val objects = result.objects.elements
+		Assert.assertNotNull(result.elements)
+		val objects = result.elements
 		Assert.assertTrue("Should read one object definition, but was " + objects.size, objects.size == 1)
 		objects.get(0).assertObject("navbar", ".navbar-header")
 	}
@@ -97,8 +97,8 @@ class ObjectsDefinitionParsingTest {
 			  navbar css .navbar-header
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objects)
-		val objects = result.objects.elements
+		Assert.assertNotNull(result.elements)
+		val objects = result.elements
 		Assert.assertTrue("Should read one object definition, but was " + objects.size, objects.size == 1)
 		objects.get(0).assertObject("navbar", "css", ".navbar-header")
 	}
@@ -112,8 +112,8 @@ class ObjectsDefinitionParsingTest {
 			  navbar-* #navbar-header
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objects)
-		val objects = result.objects.elements
+		Assert.assertNotNull(result.elements)
+		val objects = result.elements
 		Assert.assertTrue(
 			"Should read three object definitions, but was " + objects.size,
 			objects.size == 3
@@ -133,8 +133,8 @@ class ObjectsDefinitionParsingTest {
 			  navbar-* #navbar-header
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objects)
-		val objects = result.objects.elements
+		Assert.assertNotNull(result.elements)
+		val objects = result.elements
 		Assert.assertTrue(
 			"Should read four object definitions, but was " + objects.size,
 			objects.size == 4
@@ -157,8 +157,8 @@ class ObjectsDefinitionParsingTest {
 		''')
 		// then
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objects)
-		val objects = result.objects.elements
+		Assert.assertNotNull(result.elements)
+		val objects = result.elements
 		Assert.assertTrue(
 			"Should read two object definitions, but was " + objects.size,
 			objects.size == 2
@@ -187,8 +187,8 @@ class ObjectsDefinitionParsingTest {
 			  
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objects)
-		val objects = result.objects.elements
+		Assert.assertNotNull(result.elements)
+		val objects = result.elements
 		Assert.assertTrue(
 			"Should three object definitions, but was " + objects.size,
 			objects.size == 3
@@ -228,8 +228,8 @@ class ObjectsDefinitionParsingTest {
 		''')
 		// then
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objects)
-		val objects = result.objects.elements
+		Assert.assertNotNull(result.elements)
+		val objects = result.elements
 		Assert.assertTrue(
 			"Should 7 object definitions, but was " + objects.size,
 			objects.size == 7
