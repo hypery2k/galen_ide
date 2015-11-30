@@ -28,7 +28,9 @@ class ObjectsDefinitionParsingTest {
 			@objects
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNull(result.objects)
+		Assert.assertNotNull(result.objects)
+		val objects = result.objects.elements
+		Assert.assertTrue("Should read no object definition, but was " + objects.size, objects.size == 0)
 	}
 
 	@Test
@@ -158,28 +160,30 @@ class ObjectsDefinitionParsingTest {
 		Assert.assertNotNull(result.objects)
 		val objects = result.objects.elements
 		Assert.assertTrue(
-			"Should read three object definitions, but was " + objects.size,
+			"Should read two object definitions, but was " + objects.size,
 			objects.size == 2
 		)
 		val object1 = objects.get(0)
 		val object2 = objects.get(1)
 		Assert.assertTrue(
-			"Should read one child object definitions, but was " + object2.children.elements.size,
-			object2.children.elements.size == 1
+			"Should read one child object definitions, but was " + object2.children.size,
+			object2.children.size == 1
 		)
 		object1.assertObject("navbar", ".navbar-header")
 		object2.assertObject("navbar-*", "css", "div.navbar-header")
-		object2.children.elements.get(0).assertObject("navbar2", "xpath", "//*[@data-attr=navbar2-header]")
+		object2.children.get(0).assertObject("navbar2", "xpath", "//*[@data-attr=navbar2-header]")
 	}
 
 	@Test
-	def void shouldLoadMultipleObjectWithIndentMixed() {
+	def void shouldLoadMultipleObjectWithIndentMixedAndNestedChilds() {
 		val result = parseHelper.parse('''
 			@objects
-			  navbar .navbar-header
-			  navbar-* #navbar-header
-			    navbar2 xpath //*[@data-attr=navbar2-header]
-			  navbar3-* #navbar3-header
+			  navbar1 .navbar-header
+			  navbar2 #navbar-header
+			    navbar21 xpath //*[@data-attr=navbar2-header]
+				  navbar211 xpath //*[@data-attr=navbar3-header]
+			    navbar22 xpath //*[@data-attr=navbar3-header]
+			  navbar4-* #navbar3-header
 			  
 		''')
 		Assert.assertNotNull(result)
@@ -192,12 +196,48 @@ class ObjectsDefinitionParsingTest {
 		val object1 = objects.get(0)
 		val object2 = objects.get(1)
 		val object3 = objects.get(2)
-
-		object1.assertObject("navbar", ".navbar-header")
-		object2.assertObject("navbar-*", "#navbar-header")
-		object2.children.elements.get(0).assertObject("navbar2", "xpath", "//*[@data-attr=navbar2-header]")
-		object3.assertObject("navbar3-*", "#navbar3-header")
+		Assert.assertTrue(
+			"Should read two child object definitions, but was " + object2.children.size,
+			object2.children.size == 2
+		)
+		Assert.assertTrue(
+			"Should read one sub-child object definitions, but was " + object2.children.get(0).children.size,
+			object2.children.get(0).children.size == 1
+		)
+		object1.assertObject("navbar1", ".navbar-header")
+		object2.assertObject("navbar2", "#navbar-header")
+		object2.children.get(0).assertObject("navbar21", "xpath", "//*[@data-attr=navbar2-header]")
+		object2.children.get(0).children.get(0).assertObject("navbar211", "xpath", "//*[@data-attr=navbar3-header]")
+		object2.children.get(1).assertObject("navbar22", "xpath", "//*[@data-attr=navbar3-header]")
+		object3.assertObject("navbar4-*", "#navbar3-header")
 	}
+
+	@Test
+	def void shouldLoadMultipleObjectWithComplexLocators() {
+		// given, when
+		val result = parseHelper.parse('''
+			@objects
+			    navbar css .navbar-header
+			    navbar-item-*		css .navbar-collapse .nav li
+			    menubar-left		.sidebar-left
+			    header 			//*[@data-attr=navbar2-header]
+			    content			.bs-docs-container
+			    header-container	.bs-docs-header .container
+			    bootstrap-logo		span.bs-docs-booticon
+			     
+		''')
+		// then
+		Assert.assertNotNull(result)
+		Assert.assertNotNull(result.objects)
+		val objects = result.objects.elements
+		Assert.assertTrue(
+			"Should 7 object definitions, but was " + objects.size,
+			objects.size == 7
+		)
+		objects.get(0).assertObject("navbar", "css", ".navbar-header")
+		objects.get(1).assertObject("navbar-item-*", ".navbar-collapse .nav li")
+	}
+	
 
 	// HELPER
 	def void assertObject(Element element, String name, String selector, String selectorValue) {

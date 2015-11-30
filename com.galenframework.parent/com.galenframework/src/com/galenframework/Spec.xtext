@@ -10,8 +10,9 @@ Model:
 	;
 
 ObjectDeclaration:
+	{ObjectDeclaration}
 	BEGIN
-	(elements+=Element)+
+	(elements+=Element)*
 	END;
 
 Import:
@@ -49,8 +50,10 @@ ComplexSpecsReference:
 
 Element returns Element:
 	{Element}
-	name=ID (type=('id' | 'xpath' | 'css'))? selector=Selector 
-	(children=ObjectDeclaration NL)? ;
+	name=ID (type=('id' | 'xpath' | 'css'))? selector=Selector
+	BEGIN
+		(children+=Element)*
+	END ;
 
 Selector returns ecore::EString:
 	('.' | '//' | '#')? (QualifiedName | '[' | ']' | '@' | '*' | '=' | '\'' | '"') Selector?;
