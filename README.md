@@ -27,14 +27,3 @@ cd com.galenframework.idea
 ./gradlew runIdea
 ````
 ![](docs/screenshots/idea.png)
-
-## Dev instructions
-
-For local setup use [Xtext 2.9.0beta5](https://www.eclipse.org/modeling/tmf/downloads/?showAll=1&hlbuild=S201510020259&project=xtext#S201510020259) or above and clone this repository.
-
-Then in the repository run:
-
-```bash
-cd com.galenframework.parent
-mvn install eclipse:eclipse idea:idea -DskipTests=true
-```
