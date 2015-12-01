@@ -7,7 +7,6 @@ import com.galenframework.services.SpecGrammarAccess
 import com.galenframework.spec.Element
 import com.galenframework.spec.Import
 import com.galenframework.spec.Model
-import com.galenframework.spec.ObjectDeclaration
 import com.galenframework.spec.Section
 import com.google.inject.Inject
 import org.eclipse.xtext.formatting2.AbstractFormatter2
@@ -19,7 +18,7 @@ class SpecFormatter extends AbstractFormatter2 {
 
 	def dispatch void format(Model model, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
-		for (Element element : model.objects.getElements()) {
+		for (Element element : model.elements) {
 			format(element, document);
 		}
 		/*

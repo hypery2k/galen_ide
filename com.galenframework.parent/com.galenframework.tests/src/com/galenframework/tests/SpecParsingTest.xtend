@@ -30,7 +30,7 @@ class SpecParsingTest {
 			    visible
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objects)/*
+		Assert.assertNotNull(result.elements)/*
 		Assert.assertNotNull(result.layoutCheckSection)
 		val objects = result.objects.elements
 		val sections = result.layoutCheckSection
