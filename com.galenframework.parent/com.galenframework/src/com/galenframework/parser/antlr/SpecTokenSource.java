@@ -16,7 +16,7 @@ public class SpecTokenSource extends AbstractIndentationTokenSource {
 	
 	@Override
 	protected boolean shouldSplitTokenImpl(Token token) {
-		return token.getType() == InternalSpecParser.RULE_NL;
+		return token.getType() == InternalSpecParser.RULE_WS;
 	}
 
 	@Override
