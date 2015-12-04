@@ -22,8 +22,8 @@ Download [Xtext Eclipse Beta](https://www.eclipse.org/Xtext/news.html#download-l
 
 ### IDEA
 ```bash
-cd com.galenframework.parent
-cd com.galenframework.idea
+cd com.galenframework.layout.spec
+cd com.galenframework.layout.spec.idea
 ./gradlew runIdea
 ````
 ![](docs/screenshots/idea.png)
