@@ -1,0 +1,3 @@
+include 'com.galenframework.layout.spec'
+include 'com.galenframework.layout.spec.ide'
+include 'com.galenframework.layout.spec.idea'
