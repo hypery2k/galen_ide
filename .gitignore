@@ -62,7 +62,10 @@ com.galenframework.layout.spec.parent/com.galenframework.layout.spec.web/src-gen
 com.galenframework.layout.spec.parent/com.galenframework.layout.spec.web/xtend-gen/*
 com.galenframework.layout.spec.parent/com.galenframework.layout.spec/src-gen/*
 com.galenframework.layout.spec.parent/com.galenframework.layout.spec/xtend-gen/*
-
+com.galenframework.layout.spec.parent/com.galenframework.layout.spec.web/WebRoot/xtext-resources/generated/*
+*.xml_gen
 
 
 com.galenframework.layout.spec.parent/com.galenframework.layout.spec.ide/.settings/gradle.prefs
+
+
