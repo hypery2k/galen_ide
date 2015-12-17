@@ -1,0 +1,7 @@
+@objects
+  navbar  .navbar-header
+  	navbar2  .navbar-header
+  navbar3  .navbar-header
+  		
+	
+@import abc.gspec

@@ -1,4 +1,7 @@
 @objects
-  navbar  .navbar-header
-  navbar2 css  .navbar-header
-  
+  content  body
+  navbar  #navbar
+  navbar2 xpath //navbar-header
+  navbar3 css .navbar-header
+  		
+@import abc.gspec
