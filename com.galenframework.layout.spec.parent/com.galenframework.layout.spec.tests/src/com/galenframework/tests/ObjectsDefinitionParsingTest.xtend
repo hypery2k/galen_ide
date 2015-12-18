@@ -10,6 +10,9 @@ import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
 import com.galenframework.spec.Element
+import com.galenframework.spec.XpathSelector
+import com.galenframework.spec.CssSelector
+import com.galenframework.spec.IdSelector
 
 @RunWith(XtextRunner)
 @InjectWith(SpecInjectorProvider)
@@ -26,9 +29,7 @@ class ObjectsDefinitionParsingTest {
 			@objects
 		''')
 		assertNotNull(result)
-		assertNotNull(result.objects.elements)
-		val objects = result.objects.elements
-		assertTrue("Should read no object definition, but was " + objects.size, objects.size == 0)
+		assertNull(result.objects)
 	}
 
 	@Test
@@ -179,7 +180,7 @@ class ObjectsDefinitionParsingTest {
 			  navbar1 .navbar-header
 			  navbar2 #navbar-header
 			    navbar21 xpath //*[@data-attr=navbar2-header]
-				  navbar211 xpath //*[@data-attr=navbar3-header]
+			   navbar211 xpath //*[@data-attr=navbar3-header]
 			    navbar22 xpath //*[@data-attr=navbar3-header]
 			  navbar4-* #navbar3-header
 			  
@@ -235,18 +236,28 @@ class ObjectsDefinitionParsingTest {
 		objects.get(0).assertObject("navbar", "css", ".navbar-header")
 		objects.get(1).assertObject("navbar-item-*", ".navbar-collapse .nav li")
 	}
-	
 
 	// HELPER
 	def void assertObject(Element element, String name, String selector, String selectorValue) {
-		assertTrue("Should read name '" + name + "', but was " + element.name,
-			element.name.equalsIgnoreCase(name))
+		assertTrue("Should read name '" + name + "', but was " + element.name, element.name.equalsIgnoreCase(name))
 		if (selector != null) {
-			assertTrue("Should read selector '" + selector + "', but was " + element.type,
-				element.type.equalsIgnoreCase(selector))
+			val className = element.selector.class.simpleName
+			switch (selector) {
+				case 'xpath':
+					assertTrue("Should be XPath selector, but was " + className,
+						element.selector instanceof XpathSelector)
+				case 'id':
+					
+					assertTrue("Should be ID selector, but was " + className,
+						element.selector instanceof IdSelector)
+				default:
+					
+					assertTrue("Should be CSS selector, but was " + className,
+						element.selector instanceof CssSelector)
+			}
 		}
 		assertTrue("Should read selector value'" + selectorValue + "', but was " + element.selector,
-			element.selector.equalsIgnoreCase(selectorValue))
+			element.selector.value.equalsIgnoreCase(selectorValue)) // TODO correct string compare
 	}
 
 	def void assertObject(Element element, String name, String selectorValue) {
