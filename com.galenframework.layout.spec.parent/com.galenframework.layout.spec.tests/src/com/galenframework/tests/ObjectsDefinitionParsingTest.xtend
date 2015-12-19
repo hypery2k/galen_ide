@@ -77,7 +77,7 @@ class ObjectsDefinitionParsingTest {
 	}
 
 	@Test
-	def void shouldLoadOneObjectWithoutType() {
+	def void shouldLoadCssSelectorWithoutType() {
 		val result = parseHelper.parse('''
 			@objects
 			  navbar  .navbar-header
@@ -87,6 +87,45 @@ class ObjectsDefinitionParsingTest {
 		val objects = result.objects.elements
 		assertTrue("Should read one object definition, but was " + objects.size, objects.size == 1)
 		objects.get(0).assertObject("navbar", ".navbar-header")
+	}
+
+	@Test
+	def void shouldLoadIdSelector() {
+		val result = parseHelper.parse('''
+			@objects
+			  navbar  id  123
+		''')
+		assertNotNull(result)
+		assertNotNull(result.objects.elements)
+		val objects = result.objects.elements
+		assertTrue("Should read one object definition, but was " + objects.size, objects.size == 1)
+		objects.get(0).assertObject("navbar", "id", "123")
+	}
+
+	@Test
+	def void shouldLoadCssSelector() {
+		val result = parseHelper.parse('''
+			@objects
+			  navbar  css  .navbar-header
+		''')
+		assertNotNull(result)
+		assertNotNull(result.objects.elements)
+		val objects = result.objects.elements
+		assertTrue("Should read one object definition, but was " + objects.size, objects.size == 1)
+		objects.get(0).assertObject("navbar","css", ".navbar-header")
+	}
+
+	@Test
+	def void shouldLoadXPathSelector() {
+		val result = parseHelper.parse('''
+			@objects
+			  navbar  xpath  //div*
+		''')
+		assertNotNull(result)
+		assertNotNull(result.objects.elements)
+		val objects = result.objects.elements
+		assertTrue("Should read one object definition, but was " + objects.size, objects.size == 1)
+		objects.get(0).assertObject("navbar", "xpath", "//div*")
 	}
 
 	@Test

@@ -93,7 +93,7 @@ terminal GSPEC_FILE:
 	ID '.gspec';
 
 terminal ID returns ecore::EString:
-	('a'..'z' | 'A'..'Z' | '_' | '-') ('a'..'z' | 'A'..'Z' | '_' | '-' | '*' | '0'..'9')*;
+	('a'..'z' | 'A'..'Z' | '_' | '-'| '0'..'9') ('a'..'z' | 'A'..'Z' | '_' | '-' | '*' | '0'..'9')*;
 
 	// Single line comment
 terminal SL_COMMENT:
