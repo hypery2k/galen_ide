@@ -18,8 +18,8 @@ Objects:
 Import:
 	'@import' name=GSPEC_FILE;
 
-Section:
-	'=' name=STRING '='
+Section :{Section}
+	'=' => '='
 	BEGIN
 	rules+=LayoutRule*
 	taggedSection=TaggedSection?
@@ -62,38 +62,38 @@ Selector: //; returns ecore::EString:
 	IdSelector | CssSelector | XpathSelector;
 
 IdSelector:
-	'id' value=ID;
+	'id' value=IdSelectorValue;
+
+IdSelectorValue returns ecore::EString:
+	ID | INT
+;
 
 CssSelector:
 	('css')? value=CssSelectorValue;
 
 CssSelectorValue returns ecore::EString:
-	(ID | '#' | '.')+ (ID | '#' | '.')*
+	 CssExpression*
+;
+
+CssExpression returns ecore::EString:
+	( '#' | '.')? (ID | INT) (' ')?
 ;
 
 XpathSelector:
 	'xpath' value=XpathSelectorValue;
 
 XpathSelectorValue returns ecore::EString:
-	'//' ID //(ID | '[' | ']' | '@' | '*' | '=' | '/'| '\'' | '"')*
+	'//'('*')?(ID?)  ( '['|']'| '@'  | '=' | '/'| '\'' | '"'  )*
 ;
 
-QualifiedName:
-	ID ('.' ID)*;
+SelectorValue:
+	(ID|INT)+
+;
 
-terminal INT returns ecore::EInt:
-	'0'..'9' ('0'..'9' | '_')*;
-
-terminal DECIMAL:
-	INT
-	(('e' | 'E') ('+' | '-')? INT)?
-	(('b' | 'B') ('i' | 'I' | 'd' | 'D') | ('l' | 'L' | 'd' | 'D' | 'f' | 'F'))?;
-
+terminal ID returns ecore::EString: ('a'..'z' | 'A'..'Z' | '_' | '-') ('a'..'z' | 'A'..'Z' | '_' | '-' | '*' | INT)*;
+	
 terminal GSPEC_FILE:
 	ID '.gspec';
-
-terminal ID returns ecore::EString:
-	('a'..'z' | 'A'..'Z' | '_' | '-'| '0'..'9') ('a'..'z' | 'A'..'Z' | '_' | '-' | '*' | '0'..'9')*;
 
 	// Single line comment
 terminal SL_COMMENT:

@@ -11,6 +11,7 @@ import org.eclipse.xtext.junit4.util.ParseHelper
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+import com.galenframework.spec.Element
 
 @RunWith(XtextRunner)
 @InjectWith(SpecInjectorProvider)
@@ -25,13 +26,16 @@ class SpecParsingTest{
 			# objects
 			@objects
 			  navbar  .navbar-header
+			  
 			= Main section =
 			  navbar:
 			    visible
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objects.elements)/*
-		Assert.assertNotNull(result.layoutCheckSection)
+		Assert.assertNotNull(result.objects.elements)		
+		val elementRef = result.objects.elements.get(0)
+		Assert.assertSame("navbar",elementRef.name)
+		Assert.assertNotNull(result.layoutCheckSection)/*
 		val objects = result.objects.elements
 		val sections = result.layoutCheckSection
 		Assert.assertTrue("Should read one object definition, but was " + objects.size, objects.size == 1)

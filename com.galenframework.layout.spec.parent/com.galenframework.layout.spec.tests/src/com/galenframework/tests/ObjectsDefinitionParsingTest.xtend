@@ -103,6 +103,19 @@ class ObjectsDefinitionParsingTest {
 	}
 
 	@Test
+	def void shouldLoadCssSelectorWithID() {
+		val result = parseHelper.parse('''
+			@objects
+			  navbar  css  #id
+		''')
+		assertNotNull(result)
+		assertNotNull(result.objects.elements)
+		val objects = result.objects.elements
+		assertTrue("Should read one object definition, but was " + objects.size, objects.size == 1)
+		objects.get(0).assertObject("navbar", "css", "#id")
+	}
+
+	@Test
 	def void shouldLoadCssSelector() {
 		val result = parseHelper.parse('''
 			@objects
@@ -112,7 +125,7 @@ class ObjectsDefinitionParsingTest {
 		assertNotNull(result.objects.elements)
 		val objects = result.objects.elements
 		assertTrue("Should read one object definition, but was " + objects.size, objects.size == 1)
-		objects.get(0).assertObject("navbar","css", ".navbar-header")
+		objects.get(0).assertObject("navbar", "css", ".navbar-header")
 	}
 
 	@Test
@@ -286,16 +299,12 @@ class ObjectsDefinitionParsingTest {
 					assertTrue("Should be XPath selector, but was " + className,
 						element.selector instanceof XpathSelector)
 				case 'id':
-					
-					assertTrue("Should be ID selector, but was " + className,
-						element.selector instanceof IdSelector)
+					assertTrue("Should be ID selector, but was " + className, element.selector instanceof IdSelector)
 				default:
-					
-					assertTrue("Should be CSS selector, but was " + className,
-						element.selector instanceof CssSelector)
+					assertTrue("Should be CSS selector, but was " + className, element.selector instanceof CssSelector)
 			}
 		}
-		assertTrue("Should read selector value'" + selectorValue + "', but was " + element.selector,
+		assertTrue("Should read selector value'" + selectorValue + "', but was " + element.selector.value,
 			element.selector.value.equalsIgnoreCase(selectorValue)) // TODO correct string compare
 	}
 

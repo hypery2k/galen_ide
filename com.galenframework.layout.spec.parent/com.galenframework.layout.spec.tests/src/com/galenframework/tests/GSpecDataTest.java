@@ -15,12 +15,12 @@ public class GSpecDataTest extends XtextTest {
 	}
 	
 	@Test
-	public void testSimple1() {
+	public void simple1() {
 		testFile("simple1.gspec");
 	}
 	
 	@Test
-	public void testSimpleIndentation1() {
+	public void simpleIndentation1() {
 		testFile("simpleIndentation1.gspec");
 	}
 }

@@ -1,7 +1,7 @@
 @objects
   content  body
   navbar  #navbar
-  content  id navbar
+  content  id  navbar
   heading css .heading
   navbar2  xpath  //navbar
   navbar3 css #navbar div
