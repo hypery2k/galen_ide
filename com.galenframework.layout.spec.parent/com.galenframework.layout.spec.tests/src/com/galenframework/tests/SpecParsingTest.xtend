@@ -19,6 +19,37 @@ class SpecParsingTest{
 
 	@Inject
 	ParseHelper<Model> parseHelper;
+	
+	@Test
+	def void shouldParseSpecWithImport() {
+		val result = parseHelper.parse('''
+			# objects
+			@objects
+			  navbar  .navbar-header
+			  
+			@import abc.gspec
+			@import other.gspec
+			  
+			= Main section =
+			  navbar:
+			    visible
+		''')
+		Assert.assertNotNull(result)
+		Assert.assertNotNull(result.objects.elements)
+		Assert.assertNotNull(result.importSection)
+		val elements = result.objects.elements	
+		val imports = result.importSection	
+		val layoutSections = result.layoutCheckSection	
+		Assert.assertEquals(1,elements.size)
+		Assert.assertEquals(2,imports.size)
+		Assert.assertEquals("abc.gspec",imports.get(0).file)
+		Assert.assertEquals("other.gspec",imports.get(1).file)
+		Assert.assertEquals(1,layoutSections.size)
+		//Assert.assertNotNull(result.im)			
+
+
+	}
+	
 
 	@Test
 	def void loadPassSimpleSpec() {
@@ -34,8 +65,15 @@ class SpecParsingTest{
 		Assert.assertNotNull(result)
 		Assert.assertNotNull(result.objects.elements)		
 		val elementRef = result.objects.elements.get(0)
-		Assert.assertSame("navbar",elementRef.name)
-		Assert.assertNotNull(result.layoutCheckSection)/*
+		Assert.assertEquals("navbar",elementRef.name)
+		Assert.assertNotNull(result.layoutCheckSection)
+		val layoutSections = result.layoutCheckSection
+		Assert.assertEquals(1,layoutSections.size)
+		val mainSection = layoutSections.get(0)
+		Assert.assertEquals(1,mainSection.rules.size)
+		val MainSectionElementRef = mainSection.rules.get(0)
+		Assert.assertEquals("navbar",MainSectionElementRef.ref.name)
+		/*
 		val objects = result.objects.elements
 		val sections = result.layoutCheckSection
 		Assert.assertTrue("Should read one object definition, but was " + objects.size, objects.size == 1)

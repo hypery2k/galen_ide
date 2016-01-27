@@ -129,6 +129,33 @@ class ObjectsDefinitionParsingTest {
 	}
 
 	@Test
+	def void shouldLoadCssSelectorComplexWithHtmlTag() {
+		val result = parseHelper.parse('''
+			@objects
+			  navbar  css  body.navbar-header
+			  navbar  css  div > .navbar-header
+		''')
+		assertNotNull(result)
+		assertNotNull(result.objects.elements)
+		val objects = result.objects.elements
+		assertTrue("Should read two object definition, but was " + objects.size, objects.size == 2)
+		objects.get(0).assertObject("navbar", "css", "body.navbar-header")
+	}
+
+	@Test
+	def void shouldLoadCssSelectorComplexWithSubSelect() {
+		val result = parseHelper.parse('''
+			@objects
+			  navbar  css  .navbar-header div
+		''')
+		assertNotNull(result)
+		assertNotNull(result.objects.elements)
+		val objects = result.objects.elements
+		assertTrue("Should read one object definition, but was " + objects.size, objects.size == 1)
+		objects.get(0).assertObject("navbar", "css", ".navbar-header div")
+	}
+
+	@Test
 	def void shouldLoadXPathSelector() {
 		val result = parseHelper.parse('''
 			@objects
@@ -231,9 +258,10 @@ class ObjectsDefinitionParsingTest {
 			@objects
 			  navbar1 .navbar-header
 			  navbar2 #navbar-header
-			    navbar21 xpath //*[@data-attr=navbar2-header]
-			   navbar211 xpath //*[@data-attr=navbar3-header]
-			    navbar22 xpath //*[@data-attr=navbar3-header]
+			    navbar21 xpath //*[@data-attr=navbar21-header]
+			    navbar22 xpath //*[@data-attr=navbar22-header]
+			        navbar221 xpath //*[@data-attr=navbar221-header]
+			    navbar31 xpath //*[@data-attr=navbar31-header]
 			  navbar4-* #navbar3-header
 			  
 		''')
@@ -248,18 +276,18 @@ class ObjectsDefinitionParsingTest {
 		val object2 = objects.get(1)
 		val object3 = objects.get(2)
 		assertTrue(
-			"Should read two child object definitions, but was " + object2.children.size,
-			object2.children.size == 2
+			"Should three two child object definitions, but was " + object2.children.size,
+			object2.children.size == 3
 		)
 		assertTrue(
-			"Should read one sub-child object definitions, but was " + object2.children.get(0).children.size,
-			object2.children.get(0).children.size == 1
+			"Should read one sub-child object definitions, but was " + object2.children.get(1).children.size,
+			object2.children.get(1).children.size == 1
 		)
 		object1.assertObject("navbar1", ".navbar-header")
 		object2.assertObject("navbar2", "#navbar-header")
-		object2.children.get(0).assertObject("navbar21", "xpath", "//*[@data-attr=navbar2-header]")
-		object2.children.get(0).children.get(0).assertObject("navbar211", "xpath", "//*[@data-attr=navbar3-header]")
-		object2.children.get(1).assertObject("navbar22", "xpath", "//*[@data-attr=navbar3-header]")
+		object2.children.get(0).assertObject("navbar21", "xpath", "//*[@data-attr=navbar21-header]")
+		object2.children.get(1).children.get(0).assertObject("navbar221", "xpath", "//*[@data-attr=navbar221-header]")
+		object2.children.get(1).assertObject("navbar22", "xpath", "//*[@data-attr=navbar22-header]")
 		object3.assertObject("navbar4-*", "#navbar3-header")
 	}
 

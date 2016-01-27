@@ -7,7 +7,8 @@ Model:
 	{Model}
 	objects=Objects?
 	importSection+=Import*
-	layoutCheckSection+=Section*;
+	layoutCheckSection+=Section*
+;
 
 Objects:
 	'@objects'
@@ -16,13 +17,13 @@ Objects:
 	END;
 
 Import:
-	'@import' name=GSPEC_FILE;
+	'@import' file=QUALIFIED_FILENAME;
 
 Section :{Section}
-	'=' => '='
+	'=' -> '='
 	BEGIN
-	rules+=LayoutRule*
-	taggedSection=TaggedSection?
+	rules+=LayoutRule+
+	//taggedSection=TaggedSection?
 	END;
 
 TaggedSection:
@@ -30,7 +31,7 @@ TaggedSection:
 	sections+=Section+;
 
 LayoutRule:
-	ref=[Element] ':'
+	ref=[Element] ':' 
 	BEGIN
 	(references+=SpecsReference)+
 	(sections+=Section)*
@@ -57,9 +58,8 @@ Element returns Element:
 	(children+=Element)+
 	END)?;
 
-Selector: //; returns ecore::EString:
-//('.' | '//' | '#')? (ID | '[' | ']' | '@' | '*' | '=' | '\'' | '"')?;
-	IdSelector | CssSelector | XpathSelector;
+Selector: 
+	(IdSelector | CssSelector | XpathSelector) ;
 
 IdSelector:
 	'id' value=IdSelectorValue;
@@ -72,32 +72,42 @@ CssSelector:
 	('css')? value=CssSelectorValue;
 
 CssSelectorValue returns ecore::EString:
-	 CssExpression*
+	 CSSSELECTOR_VALUE|HTMLTAG_VALUE (('>'|','|':')?  CSSSELECTOR_VALUE|HTMLTAG_VALUE)*
 ;
 
-CssExpression returns ecore::EString:
-	( '#' | '.')? (ID | INT) (' ')?
+ terminal QUALIFIED_FILENAME:
+	ID '.gspec'
 ;
+
+terminal HTMLTAG_VALUE returns ecore::EString:
+	//PREFIXABLE_ID_START+
+	('body'|'br'|'li'|'a' | 'div'| 'span') (CSSSELECTOR_VALUE)?
+;
+
+terminal CSSSELECTOR_VALUE returns ecore::EString:
+ ( '#' | '.' |':')  PREFIXABLE_ID_START ('a'..'z' | 'A'..'Z' | '_' | '-'| INT )+ 
+;
+
 
 XpathSelector:
 	'xpath' value=XpathSelectorValue;
 
 XpathSelectorValue returns ecore::EString:
-	'//'('*')?(ID?)  ( '['|']'| '@'  | '=' | '/'| '\'' | '"'  )*
+	XPATH_VALUE
 ;
 
-SelectorValue:
-	(ID|INT)+
-;
-
-terminal ID returns ecore::EString: ('a'..'z' | 'A'..'Z' | '_' | '-') ('a'..'z' | 'A'..'Z' | '_' | '-' | '*' | INT)*;
-	
-terminal GSPEC_FILE:
-	ID '.gspec';
-
+terminal XPATH_VALUE returns ecore::EString:
+	'//'('*'|ID) ( '['->']')*
+; 
 	// Single line comment
-terminal SL_COMMENT:
-	'#' WS !('\n' | '\r')* ('\r'? '\n')?;
+terminal SL_COMMENT:	'#' WS !('\n' | '\r')* NEW_LINE?;
+
+
+terminal ID returns ecore::EString: PREFIXABLE_ID_START ('a'..'z'|'A'..'Z'|'-'|'*' | INT )+;
+
+terminal fragment PREFIXABLE_ID_START: ('a'..'z'|'A'..'Z') ;
+
+terminal fragment NEW_LINE: ('\r'? '\n');
 
 	// The following synthetic tokens are used for the indentation-aware blocks
 terminal BEGIN:

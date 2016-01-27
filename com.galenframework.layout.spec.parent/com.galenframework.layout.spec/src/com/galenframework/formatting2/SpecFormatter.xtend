@@ -5,7 +5,6 @@ package com.galenframework.formatting2
 
 import com.galenframework.services.SpecGrammarAccess
 import com.galenframework.spec.Element
-import com.galenframework.spec.Import
 import com.galenframework.spec.Model
 import com.galenframework.spec.Objects
 import com.galenframework.spec.Section
@@ -20,9 +19,10 @@ class SpecFormatter extends AbstractFormatter2 {
 	def dispatch void format(Model model, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
 		model.getObjects.format;
+		/* 
 		for (Import importSection : model.getImportSection()) {
 			importSection.format;
-		}
+		}*/
 		for (Section layoutCheckSection : model.getLayoutCheckSection()) {
 			layoutCheckSection.format;
 		}
