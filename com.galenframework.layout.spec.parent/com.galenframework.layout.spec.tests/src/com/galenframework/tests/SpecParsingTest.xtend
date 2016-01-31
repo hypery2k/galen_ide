@@ -45,6 +45,8 @@ class SpecParsingTest{
 		Assert.assertEquals("abc.gspec",imports.get(0).file)
 		Assert.assertEquals("other.gspec",imports.get(1).file)
 		Assert.assertEquals(1,layoutSections.size)
+		val mainSection = layoutSections.get(0)
+		Assert.assertEquals(1,mainSection.rules.size)
 		//Assert.assertNotNull(result.im)			
 
 

@@ -134,12 +134,15 @@ class ObjectsDefinitionParsingTest {
 			@objects
 			  navbar  css  body.navbar-header
 			  navbar  css  div > .navbar-header
+			  navbar  css  div .navbar-header
 		''')
 		assertNotNull(result)
 		assertNotNull(result.objects.elements)
 		val objects = result.objects.elements
-		assertTrue("Should read two object definition, but was " + objects.size, objects.size == 2)
+		assertTrue("Should read three object definition, but was " + objects.size, objects.size == 3)
 		objects.get(0).assertObject("navbar", "css", "body.navbar-header")
+		objects.get(1).assertObject("navbar", "css", "div > .navbar-header")
+		objects.get(2).assertObject("navbar", "css", "div .navbar-header")
 	}
 
 	@Test
@@ -206,7 +209,7 @@ class ObjectsDefinitionParsingTest {
 		val result = parseHelper.parse('''
 			@objects
 			  navbar .navbar-header
-			  body  body
+			  content  body
 			  navbar2 xpath //*[@data-attr=navbar-header]
 			  navbar-* #navbar-header
 		''')
@@ -218,7 +221,7 @@ class ObjectsDefinitionParsingTest {
 			objects.size == 4
 		)
 		objects.get(0).assertObject("navbar", ".navbar-header")
-		objects.get(1).assertObject("body", "body")
+		objects.get(1).assertObject("content", "body")
 		objects.get(2).assertObject("navbar2", "xpath", "//*[@data-attr=navbar-header]")
 		objects.get(3).assertObject("navbar-*", "#navbar-header")
 	}
@@ -297,12 +300,12 @@ class ObjectsDefinitionParsingTest {
 		val result = parseHelper.parse('''
 			@objects
 			    navbar css .navbar-header
-			    navbar-item-*		css .navbar-collapse .nav li
-			    menubar-left		.sidebar-left
-			    header 			//*[@data-attr=navbar2-header]
-			    content			.bs-docs-container
-			    header-container	.bs-docs-header .container
-			    bootstrap-logo		span.bs-docs-booticon
+			    navbar-item-*    css .navbar-collapse .nav li
+			    menubar-left   .sidebar-left
+			    header      //*[@data-attr=navbar2-header]
+			    content    .bs-docs-container
+			    header-container    .bs-docs-header .container
+			    bootstrap-logo    span.bs-docs-booticon
 			     
 		''')
 		// then
