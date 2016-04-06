@@ -1,6 +1,6 @@
 # Galen IDE integration
 
-Vote on [`Kickstarter`](https://www.kickstarter.com/projects/1453417775/1243022476) for the project.
+Vote on [`Kickstarter`](https://www.kickstarter.com/projects/1453417775/1487427501) for the project.
 
 [![Build Status](https://travis-ci.org/hypery2k/galen_ide.svg?branch=master)](https://travis-ci.org/hypery2k/galen_ide) [![Build Status](https://martinreinhardt-online.de/jenkins/buildStatus/icon?job=Galen_IDE/build)](https://martinreinhardt-online.de/jenkins/view/GalenFramework/job/Galen_IDE/job/build/) [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=mreinhardt&url=https://github.com/hypery2k/galen_ide&title=badges&language=&tags=github&category=software)
 
