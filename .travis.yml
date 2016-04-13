@@ -14,6 +14,6 @@ jdk:
   - oraclejdk8
 
 script:
-  - cd com.galenframework.layout.spec.parent 
-  - mvn clean verify
+  - cd com.galenframework.specs.parent
+  - mvn clean install verify
   - ./gradlew test

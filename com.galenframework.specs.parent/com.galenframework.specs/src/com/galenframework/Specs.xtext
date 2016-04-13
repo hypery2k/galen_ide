@@ -1,0 +1,114 @@
+grammar com.galenframework.Specs with org.eclipse.xtext.common.Terminals
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+generate specs "http://www.galenframework.com/Specs"
+
+Model:
+	{Model}
+	objects=Objects?
+	importSection+=Import*
+	layoutCheckSection+=Section*;
+
+Objects:
+	'@objects'
+	BEGIN
+	(elements+=Element)+
+	END;
+
+Import:
+	'@import' file=QUALIFIED_FILENAME;
+
+Section:
+	{Section}
+	name=SectionLabel
+	BEGIN
+	rules+=LayoutRule+
+	//taggedSection=TaggedSection?
+	END;
+
+SectionLabel returns ecore::EString:
+	'=' -> '=';
+
+TaggedSection:
+	'@on' tag=STRING
+	sections+=Section+;
+
+LayoutRule:
+	ref=[Element] ':'
+	BEGIN
+	(references+=SpecsReference)+
+	(sections+=Section)*
+	END;
+
+SpecsReference:
+	{SpecsReference}
+	SimpleSpecsReference | ComplexSpecsReference;
+
+SimpleSpecsReference:
+	'visible' | 'absent';
+
+ComplexSpecsReference:
+	{ComplexSpecsReference} ((('near' | 'below' | 'above') INT 'to' INT 'px') |
+	('aligned horizontally' ('all' | 'top' | 'bottom' | 'centered') (ref=[Element])? (INT 'px')?) |
+	('aligned vertically' ('all' | 'left' | 'bottom' | 'right') (ref=[Element])? (INT 'px')?) |
+	('height' ('<' | '>') (INT 'px' | 'screen/height')) |
+	('width' ('<' | '>') (INT 'px' | 'screen/width@')));
+
+Element returns Element:
+	{Element}
+	name=ID selector=Selector
+	(BEGIN
+	(children+=Element)+
+	END)?;
+
+Selector:
+	(IdSelector | CssSelector | XpathSelector);
+
+IdSelector:
+	'id' value=IdSelectorValue;
+
+IdSelectorValue returns ecore::EString:
+	ID | INT;
+
+CssSelector:
+	('css')? value=CssSelectorValue;
+
+CssSelectorValue returns ecore::EString:
+	(CSSSELECTOR_VALUE | HTMLTAG_VALUE) (('>' | ',' | ':')? CSSSELECTOR_VALUE | HTMLTAG_VALUE)*;
+
+terminal QUALIFIED_FILENAME:
+	ID '.gspec';
+
+terminal HTMLTAG_VALUE returns ecore::EString:
+//PREFIXABLE_ID_START+
+	('body' | 'br' | 'li' | 'a' | 'div' | 'span') (CSSSELECTOR_VALUE)?;
+
+terminal CSSSELECTOR_VALUE returns ecore::EString:
+	('#' | '.' | ':') PREFIXABLE_ID_START ('a'..'z' | 'A'..'Z' | '_' | '-' | INT)+;
+
+XpathSelector:
+	'xpath' value=XpathSelectorValue;
+
+XpathSelectorValue returns ecore::EString:
+	XPATH_VALUE;
+
+terminal XPATH_VALUE returns ecore::EString:
+	'//' ('*' | ID) ('['->']')*;
+	// Single line comment
+terminal SL_COMMENT:
+	'#' WS !('\n' | '\r')* NEW_LINE?;
+
+terminal ID returns ecore::EString:
+	PREFIXABLE_ID_START ('a'..'z' | 'A'..'Z' | '-' | '*' | INT)+;
+
+terminal fragment PREFIXABLE_ID_START:
+	('a'..'z' | 'A'..'Z');
+
+terminal fragment NEW_LINE:
+	('\r'? '\n');
+
+	// The following synthetic tokens are used for the indentation-aware blocks
+terminal BEGIN:
+	'synthetic:BEGIN'; // increase indentation
+terminal END:
+	'synthetic:END'; // decrease indentation

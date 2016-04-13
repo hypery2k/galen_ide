@@ -5,6 +5,9 @@
 # Eclipse files
 .project
 
+# Gradle
+.gradle
+
 # IDEA files
 .idea
 *.iml
@@ -12,60 +15,58 @@
 *.iws
 
 # build folders
-com.galenframework.layout.spec.parent/bin/*
-com.galenframework.layout.spec.parent/target/*
-com.galenframework.layout.spec.parent/.gradle/*
-com.galenframework.layout.spec.parent/.settings/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec/build/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec/.settings/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.ide/bin/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.ide/build/
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.ide/target/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.ide/.settings/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.idea/bin/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.idea/build/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.idea/target/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.idea/.settings/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.tests/bin/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.tests/target/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.tests/.settings/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.ui.tests/bin/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.ui.tests/target/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.ui.tests/.settings/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.ui/bin/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.ui/target/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.ui/.settings/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.web/bin/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.web/target/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.web/.settings/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec/bin/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec/target/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec/.settings/*
+com.galenframework.specs.parent/bin/*
+com.galenframework.specs.parent/target/*
+com.galenframework.specs.parent/.gradle/*
+com.galenframework.specs.parent/.settings/*
+com.galenframework.specs.parent/com.galenframework.specs/build/*
+com.galenframework.specs.parent/com.galenframework.specs/.settings/*
+com.galenframework.specs.parent/com.galenframework.specs.ide/bin/*
+com.galenframework.specs.parent/com.galenframework.specs.ide/build/
+com.galenframework.specs.parent/com.galenframework.specs.ide/target/*
+com.galenframework.specs.parent/com.galenframework.specs.ide/.settings/*
+com.galenframework.specs.parent/com.galenframework.specs.idea/bin/*
+com.galenframework.specs.parent/com.galenframework.specs.idea/build/*
+com.galenframework.specs.parent/com.galenframework.specs.idea/target/*
+com.galenframework.specs.parent/com.galenframework.specs.idea/.settings/*
+com.galenframework.specs.parent/com.galenframework.specs.tests/bin/*
+com.galenframework.specs.parent/com.galenframework.specs.tests/target/*
+com.galenframework.specs.parent/com.galenframework.specs.tests/.settings/*
+com.galenframework.specs.parent/com.galenframework.specs.ui.tests/bin/*
+com.galenframework.specs.parent/com.galenframework.specs.ui.tests/target/*
+com.galenframework.specs.parent/com.galenframework.specs.ui.tests/.settings/*
+com.galenframework.specs.parent/com.galenframework.specs.ui/bin/*
+com.galenframework.specs.parent/com.galenframework.specs.ui/target/*
+com.galenframework.specs.parent/com.galenframework.specs.ui/.settings/*
+com.galenframework.specs.parent/com.galenframework.specs.web/bin/*
+com.galenframework.specs.parent/com.galenframework.specs.web/target/*
+com.galenframework.specs.parent/com.galenframework.specs.web/.settings/*
+com.galenframework.specs.parent/com.galenframework.specs/bin/*
+com.galenframework.specs.parent/com.galenframework.specs/target/*
+com.galenframework.specs.parent/com.galenframework.specs/.settings/*
 samples/.metadata/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.target/.classpath
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.target/bin/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.target/.settings/*
+com.galenframework.specs.parent/com.galenframework.specs.target/.classpath
+com.galenframework.specs.parent/com.galenframework.specs.target/bin/*
+com.galenframework.specs.parent/com.galenframework.specs.target/.settings/*
 
 # Gen folders
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec/model/generated/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.ide/src-gen/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.ide/xtend-gen/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.idea/src-gen/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.idea/xtend-gen/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.tests/src-gen/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.tests/xtend-gen/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.ui.tests/xtend-gen/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.ui.tests/src-gen/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.ui/src-gen/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.ui/xtend-gen/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.web/src-gen/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.web/xtend-gen/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec/src-gen/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec/xtend-gen/*
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.web/WebRoot/xtext-resources/generated/*
+com.galenframework.specs.parent/com.galenframework.specs/model/generated/*
+com.galenframework.specs.parent/com.galenframework.specs.ide/src-gen/*
+com.galenframework.specs.parent/com.galenframework.specs.ide/xtend-gen/*
+com.galenframework.specs.parent/com.galenframework.specs.idea/src-gen/*
+com.galenframework.specs.parent/com.galenframework.specs.idea/xtend-gen/*
+com.galenframework.specs.parent/com.galenframework.specs.tests/src-gen/*
+com.galenframework.specs.parent/com.galenframework.specs.tests/xtend-gen/*
+com.galenframework.specs.parent/com.galenframework.specs.ui.tests/xtend-gen/*
+com.galenframework.specs.parent/com.galenframework.specs.ui.tests/src-gen/*
+com.galenframework.specs.parent/com.galenframework.specs.ui/src-gen/*
+com.galenframework.specs.parent/com.galenframework.specs.ui/xtend-gen/*
+com.galenframework.specs.parent/com.galenframework.specs.web/src-gen/*
+com.galenframework.specs.parent/com.galenframework.specs.web/xtend-gen/*
+com.galenframework.specs.parent/com.galenframework.specs/src-gen/*
+com.galenframework.specs.parent/com.galenframework.specs/xtend-gen/*
+com.galenframework.specs.parent/com.galenframework.specs.web/WebRoot/xtext-resources/generated/*
 *.xml_gen
 
 
-com.galenframework.layout.spec.parent/com.galenframework.layout.spec.ide/.settings/gradle.prefs
-
-
+com.galenframework.layout.spec.parent/com.galenframework.layout.spec.idea/build/classes/main/com/galenframework/idea/lang/SpecFileType.class

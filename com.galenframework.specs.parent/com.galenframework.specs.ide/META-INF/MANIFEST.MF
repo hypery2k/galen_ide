@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Galen Specs Language Support
+Bundle-Vendor: Martin Reinhardt
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: com.galenframework.specs.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: com.galenframework.specs,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: com.galenframework.ide.contentassist.antlr,
+ com.galenframework.ide.contentassist.antlr.internal,
+ com.galenframework.ide.contentassist.antlr.lexer
+
