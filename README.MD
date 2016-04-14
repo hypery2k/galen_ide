@@ -21,6 +21,12 @@ Download [Xtext Eclipse Beta](https://www.eclipse.org/Xtext/news.html#download-l
 
 
 ### IDEA
+
+#### Update Site
+
+Plugin is available via [nightly channel](https://plugins.jetbrains.com/plugin/8302). The latest working build is published there.
+
+#### build
 ```bash
 cd com.galenframework.layout.spec
 cd com.galenframework.layout.spec.idea
