@@ -17,4 +17,31 @@ ideaDevelopment {
 	}
 }
 
+task wrapper(type: Wrapper) {
+   gradleVersion = '2.8'
+}
+
+task unzipRepository(type: Copy, dependsOn: 'ideaRepository') {
+    def zipFile = file("${buildDir}/ideaRepository/com.galenframework.specs.idea-1.0.0-SNAPSHOT.zip")
+    def outputDir = file("${buildDir}/publish/exploded")
+
+    from zipTree(zipFile)
+    into outputDir
+}
+
+task prepareRepository(type: Copy, dependsOn: 'unzipRepository') {
+    from "${buildDir}/publish/exploded/com.galenframework.specs.idea"
+    into "${buildDir}/publish/src/main/resources"
+}
+
+task plugin(type: Exec, dependsOn: 'prepareRepository') {
+  executable "sh"
+  args "-c", "cp publish.gradle ${buildDir}/publish/build.gradle && cd ${buildDir}/publish && ../../gradlew buildPlugin'"
+}
+
+task publish(type: Exec, dependsOn: 'prepareRepository') {
+  executable "sh"
+  args "-c", "cp gradle.properties ${buildDir}/publish/ && cp publish.gradle ${buildDir}/publish/build.gradle && cd ${buildDir}/publish && ../../gradlew publishPlugin -PpublishUsername=\"${publishUsername}\" -PpublishPassword=\"${publishPassword}\""
+}
+
 ideaRepository.rootUrl = "${buildDir}/ideaRepository"

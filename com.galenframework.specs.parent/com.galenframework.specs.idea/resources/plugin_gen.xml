@@ -1,0 +1,93 @@
+<idea-plugin version="2">
+	<extensions defaultExtensionNs="org.eclipse.xtext.idea">
+		<package
+			uri="http://www.galenframework.com/Specs"
+			class="com.galenframework.specs.SpecsPackage"
+		/>
+		<resourceFactory 
+			type="gspec"
+			class="org.eclipse.xtext.resource.IResourceFactory"
+			factoryClass="com.galenframework.idea.SpecsExtensionFactory"
+		/>
+		<resourceServiceProvider
+			uriExtension="gspec"
+			class="org.eclipse.xtext.idea.resource.IResourceIdeaServiceProvider"
+			factoryClass="com.galenframework.idea.SpecsExtensionFactory"
+		/>
+
+		<lang.setup
+			language="com.galenframework.Specs"
+			implementationClass="com.galenframework.idea.SpecsIdeaSetup"
+		/>
+	</extensions>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<psi.treeChangePreprocessor implementation="com.galenframework.idea.lang.psi.SpecsCodeBlockModificationListener"/>
+
+		<fileTypeFactory implementation="com.galenframework.idea.lang.SpecsFileTypeFactory"/>
+		<stubElementTypeHolder class="com.galenframework.idea.lang.SpecsElementTypeProvider"/>
+		<lang.ast.factory 
+			language="com.galenframework.Specs"
+			factoryClass="com.galenframework.idea.SpecsExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.lang.BaseXtextASTFactory"
+		/>
+		<lang.parserDefinition 
+			language="com.galenframework.Specs"
+			factoryClass="com.galenframework.idea.SpecsExtensionFactory"
+			implementationClass="com.galenframework.idea.lang.parser.SpecsParserDefinition"
+		/>
+		<lang.findUsagesProvider 
+			language="com.galenframework.Specs"
+			factoryClass="com.galenframework.idea.SpecsExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.findusages.BaseXtextFindUsageProvider"
+		/>
+		<lang.refactoringSupport 
+			language="com.galenframework.Specs"
+			factoryClass="com.galenframework.idea.SpecsExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.refactoring.BaseXtextRefactoringSupportProvider"
+		/>
+		<lang.namesValidator 
+			language="com.galenframework.Specs"
+			factoryClass="com.galenframework.idea.SpecsExtensionFactory"
+			implementationClass="com.intellij.lang.refactoring.NamesValidator"
+		/>
+		<lang.syntaxHighlighterFactory key="com.galenframework.Specs" implementationClass="com.galenframework.idea.highlighting.SpecsSyntaxHighlighterFactory" />
+		<lang.braceMatcher 
+			language="com.galenframework.Specs"
+			factoryClass="com.galenframework.idea.SpecsExtensionFactory"
+			implementationClass="com.intellij.lang.PairedBraceMatcher"
+		/>
+		<annotator 
+			language="com.galenframework.Specs"
+			factoryClass="com.galenframework.idea.SpecsExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.annotation.IssueAnnotator"
+		/>
+		<completion.contributor language="com.galenframework.Specs" implementationClass="com.galenframework.idea.completion.SpecsCompletionContributor"/>
+		<pom.declarationSearcher implementation="com.galenframework.idea.lang.pom.SpecsPomDeclarationSearcher"/>
+
+		<lang.psiStructureViewFactory 
+			language="com.galenframework.Specs"
+			factoryClass="com.galenframework.idea.SpecsExtensionFactory"
+			implementationClass="com.intellij.lang.PsiStructureViewFactory"
+		/>
+		<facetType implementation="com.galenframework.idea.facet.SpecsFacetType"/>
+      	<lang.documentationProvider 
+      		language="com.galenframework.Specs"
+      		factoryClass="com.galenframework.idea.SpecsExtensionFactory"
+      		implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"
+      	/>
+		<colorSettingsPage implementation="com.galenframework.idea.highlighting.SpecsColorSettingsPage"/>
+		<highlightVisitor implementation="com.galenframework.idea.highlighting.SpecsSemanticHighlightVisitor"/>
+
+		<lang.formatter 
+			language="com.galenframework.Specs"
+			factoryClass="com.galenframework.idea.SpecsExtensionFactory"
+			implementationClass="com.intellij.formatting.FormattingModelBuilder"
+		/>
+		<lang.commenter 
+			language="com.galenframework.Specs"
+			factoryClass="com.galenframework.idea.SpecsExtensionFactory"
+			implementationClass="com.intellij.lang.CodeDocumentationAwareCommenter"
+		/>
+	</extensions>
+</idea-plugin>
