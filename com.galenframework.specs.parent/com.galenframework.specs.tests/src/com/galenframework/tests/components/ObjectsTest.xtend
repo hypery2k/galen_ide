@@ -1,4 +1,5 @@
-package com.galenframework.tests;
+
+package com.galenframework.tests.components
 
 import com.galenframework.specs.Model
 import com.google.inject.Inject
@@ -13,10 +14,11 @@ import com.galenframework.specs.Element
 import com.galenframework.specs.XpathSelector
 import com.galenframework.specs.CssSelector
 import com.galenframework.specs.IdSelector
+import com.galenframework.tests.SpecsInjectorProvider
 
 @RunWith(XtextRunner)
 @InjectWith(SpecsInjectorProvider)
-class ObjectsDefinitionParsingTest {
+class ObjectsTest {
 
 	@Inject
 	ParseHelper<Model> parseHelper;
