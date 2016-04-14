@@ -6,6 +6,7 @@ generate specs "http://www.galenframework.com/Specs"
 Model:
 	{Model}
 	objects=Objects?
+		
 	importSection+=Import*
 	layoutCheckSection+=Section*;
 
@@ -20,14 +21,14 @@ Import:
 
 Section:
 	{Section}
-	name=SectionLabel
+	name=SECTION_LABEL
 	BEGIN
 	rules+=LayoutRule+
 	//taggedSection=TaggedSection?
 	END;
 
-SectionLabel returns ecore::EString:
-	'=' -> '=';
+terminal SECTION_LABEL  returns ecore::EString:
+	'=' TEXT_VALUE '=';
 
 TaggedSection:
 	'@on' tag=STRING
@@ -107,6 +108,9 @@ terminal fragment PREFIXABLE_ID_START:
 terminal fragment NEW_LINE:
 	('\r'? '\n');
 
+terminal fragment TEXT_VALUE:
+	  ('a'..'z' | 'A'..'Z'| ' ') ('a'..'z' | 'A'..'Z' | ' ' | '.' | INT)*
+;
 	// The following synthetic tokens are used for the indentation-aware blocks
 terminal BEGIN:
 	'synthetic:BEGIN'; // increase indentation

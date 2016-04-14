@@ -24,22 +24,29 @@ class LayoutTest{
 	@Test
 	def void shouldParseLayoutRuleTitleSimple() {
 		val result = parseHelper.parse('''
-			= Main section =
+			= Main =
+				bootstrap-logo:
+				    visible
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objects.elements)
-		Assert.assertNotNull(result.importSection)
-		val elements = result.objects.elements	
-		val imports = result.importSection	
-		val layoutSections = result.layoutCheckSection	
-		Assert.assertEquals(1,elements.size)
-		Assert.assertEquals(2,imports.size)
-		Assert.assertEquals("abc.gspec",imports.get(0).file)
-		Assert.assertEquals("other.gspec",imports.get(1).file)
+		Assert.assertNotNull(result.layoutCheckSection)
+		val layoutSections = result.layoutCheckSection
 		Assert.assertEquals(1,layoutSections.size)
-		val mainSection = layoutSections.get(0)
-		Assert.assertEquals(1,mainSection.rules.size)
-		//Assert.assertNotNull(result.im)			
+		Assert.assertEquals("= Main =",layoutSections.get(0).name)
+
+
+	}@Test
+	def void shouldParseLayoutRuleTitleSimpleWhitespace() {
+		val result = parseHelper.parse('''
+			= Main section =
+				bootstrap-logo:
+				    visible
+		''')
+		Assert.assertNotNull(result)
+		Assert.assertNotNull(result.layoutCheckSection)
+		val layoutSections = result.layoutCheckSection
+		Assert.assertEquals(1,layoutSections.size)
+		Assert.assertEquals("= Main section =",layoutSections.get(0).name)	
 
 
 	}
