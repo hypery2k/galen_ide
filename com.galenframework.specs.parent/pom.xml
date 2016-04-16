@@ -21,6 +21,8 @@
 		<module>com.galenframework.specs.target</module>
 		<module>com.galenframework.specs.tests</module>
 		<module>com.galenframework.specs.ui.tests</module>
+		<module>com.galenframework.specs.update</module>
+		<module>com.galenframework.specs.feature</module>
 	</modules>
 	<build>
 		<plugins>
