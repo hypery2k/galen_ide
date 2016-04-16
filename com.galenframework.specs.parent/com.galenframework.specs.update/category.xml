@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/com.galenframework.specs.feature_1.0.0.qualifier.jar" id="com.galenframework.specs.feature" version="1.0.0.qualifier">
+      <category name="galenframework.updatesite"/>
+   </feature>
+   <category-def name="galenframework.updatesite" label="Galen Eclipse Integration"/>
+</site>
