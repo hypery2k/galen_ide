@@ -15,5 +15,5 @@ jdk:
 
 script:
   - cd com.galenframework.specs.parent
-  - mvn clean install verify
+  - mvn clean  verify
   - ./gradlew test
