@@ -29,6 +29,9 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.6</version>
 				<configuration>
+					<webApp>
+		     			<contextPath>/galen_ide</contextPath>
+					</webApp>
 					<warSourceDirectory>WebRoot</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
