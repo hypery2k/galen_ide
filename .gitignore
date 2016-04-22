@@ -48,6 +48,7 @@ samples/.metadata/*
 com.galenframework.specs.parent/com.galenframework.specs.target/.classpath
 com.galenframework.specs.parent/com.galenframework.specs.target/bin/*
 com.galenframework.specs.parent/com.galenframework.specs.target/.settings/*
+com.galenframework.specs.parent/com.galenframework.specs.update/target/*
 
 # Gen folders
 com.galenframework.specs.parent/com.galenframework.specs/model/generated/*
