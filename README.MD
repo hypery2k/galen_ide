@@ -16,9 +16,14 @@ Feel free to donate
 
 
 ### Eclipse
+#### Update Site
+
+Plugin is available as [continous build](https://martinreinhardt-online.de/update_sites/galen_ide/nightly/repository/). The latest working build is published there.
+
+#### build
+
 Download [Xtext Eclipse Beta](https://www.eclipse.org/Xtext/news.html#download-links) and copy the [latest plugins](https://github.com/hypery2k/galen_ide/releases/latest) into the dropins folder:
 ![](docs/screenshots/eclipse.png)
-
 
 ### IDEA
 
@@ -33,3 +38,9 @@ cd com.galenframework.layout.spec.idea
 ./gradlew runIdea
 ````
 ![](docs/screenshots/idea.png)
+
+### Web
+
+Preview is available [here](https://martinreinhardt-online.de/galen_ide/).
+
+See 
