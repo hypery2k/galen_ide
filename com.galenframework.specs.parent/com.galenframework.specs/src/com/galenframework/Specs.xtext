@@ -42,11 +42,10 @@ LayoutRule:
 	END;
 
 SpecsReference:
-	{SpecsReference}
-	SimpleSpecsReference | ComplexSpecsReference;
+	(SimpleSpecsReference | ComplexSpecsReference);
 
 SimpleSpecsReference:
-	'visible' | 'absent';
+	value=('visible' | 'absent');
 
 ComplexSpecsReference:
 	{ComplexSpecsReference} ((('near' | 'below' | 'above') INT 'to' INT 'px') |

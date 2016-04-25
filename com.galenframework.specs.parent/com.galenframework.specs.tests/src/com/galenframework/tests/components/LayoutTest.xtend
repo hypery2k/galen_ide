@@ -12,6 +12,10 @@ import org.eclipse.xtext.junit4.util.ParseHelper
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+import com.galenframework.services.SpecsGrammarAccess.SimpleSpecsReferenceElements
+import com.galenframework.specs.SimpleSpecsReference
+import com.galenframework.specs.SpecsReference
+import com.galenframework.specs.ComplexSpecsReference
 
 @RunWith(XtextRunner)
 @InjectWith(SpecsInjectorProvider)
@@ -32,23 +36,63 @@ class LayoutTest{
 		Assert.assertNotNull(result.layoutCheckSection)
 		val layoutSections = result.layoutCheckSection
 		Assert.assertEquals(1,layoutSections.size)
-		Assert.assertEquals("= Main =",layoutSections.get(0).name)
-
-
-	}@Test
+		val layoutSection = layoutSections.get(0)
+		Assert.assertEquals("= Main =",layoutSection.name)
+		Assert.assertEquals(1,layoutSection.rules.size)
+		Assert.assertEquals(1,layoutSection.rules.size)
+		val layoutRule = layoutSection.rules.get(0)
+		Assert.assertEquals(1,layoutRule.references.size)	
+		val layoutRuleSpec= layoutRule.references.get(0)
+		Assert.assertTrue(layoutRuleSpec instanceof SimpleSpecsReference)	
+	}
+	
+	@Test
 	def void shouldParseLayoutRuleTitleSimpleWhitespace() {
 		val result = parseHelper.parse('''
 			= Main section =
 				bootstrap-logo:
-				    visible
+				    absent
 		''')
 		Assert.assertNotNull(result)
 		Assert.assertNotNull(result.layoutCheckSection)
 		val layoutSections = result.layoutCheckSection
 		Assert.assertEquals(1,layoutSections.size)
-		Assert.assertEquals("= Main section =",layoutSections.get(0).name)	
-
-
+		val layoutSection = layoutSections.get(0)
+		Assert.assertEquals("= Main section =",layoutSection.name)	
+		Assert.assertEquals(1,layoutSection.rules.size)
+		val layoutRule = layoutSection.rules.get(0)
+		Assert.assertEquals(1,layoutRule.references.size)	
+		val layoutRuleSpec= layoutRule.references.get(0)
+		Assert.assertTrue(layoutRuleSpec instanceof SimpleSpecsReference)	
+		val simpleSpec = layoutRuleSpec as SimpleSpecsReference
+		Assert.assertEquals("absent",simpleSpec.value)	
 	}
+	
+	@Test
+	def void shouldParseMultipleRuleSpecs() {
+		val result = parseHelper.parse('''
+			= Main section =
+				bootstrap-logo:
+				    visible
+				    aligned horizontally top header
+		''')
+		Assert.assertNotNull(result)
+		Assert.assertNotNull(result.layoutCheckSection)
+		val layoutSections = result.layoutCheckSection
+		Assert.assertEquals(1,layoutSections.size)
+		val layoutSection = layoutSections.get(0)
+		Assert.assertEquals("= Main section =",layoutSection.name)	
+		Assert.assertEquals(1,layoutSection.rules.size)
+		val layoutRule = layoutSection.rules.get(0)
+		Assert.assertEquals(2,layoutRule.references.size)	
+		val layoutRuleSpec1= layoutRule.references.get(0)
+		val layoutRuleSpec2= layoutRule.references.get(1)
+		Assert.assertTrue(layoutRuleSpec1 instanceof SimpleSpecsReference)	
+		Assert.assertTrue(layoutRuleSpec2 instanceof ComplexSpecsReference)	
+		val simpleSpec = layoutRuleSpec1 as SimpleSpecsReference
+		Assert.assertEquals("visible",simpleSpec.value)	
+		val complexSpec = layoutRuleSpec2 as ComplexSpecsReference
+	}
+	
 
 }
