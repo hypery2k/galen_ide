@@ -20,6 +20,6 @@ intellij {
     username publishUsername
     password publishPassword
     pluginId '8302'
-    channel 'nightly'
+    channel !release?'beta':''
   } 
 }

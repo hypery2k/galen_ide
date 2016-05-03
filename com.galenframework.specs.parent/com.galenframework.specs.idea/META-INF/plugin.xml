@@ -4,7 +4,7 @@
 	<description>
       This plugin enables smart editing of Galen Specs Language files.
 	</description>
-	<version>1.0.0</version>
+	<version>0.1.0</version>
 	<vendor>Martin Reinhardt</vendor>
 
 	<idea-version since-build="141.0" until-build="145.99999"/>
