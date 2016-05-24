@@ -6,7 +6,6 @@ generate specs "http://www.galenframework.com/Specs"
 Model:
 	{Model}
 	objects=Objects?
-		
 	importSection+=Import*
 	layoutCheckSection+=Section*;
 
@@ -17,28 +16,29 @@ Objects:
 	END;
 
 Import:
-	'@import' file=QUALIFIED_FILENAME;
+	IMPORT_DEFINITION;
 
 Section:
-	{Section}
 	name=SECTION_LABEL
 	BEGIN
-	rules+=LayoutRule+
-	//taggedSection=TaggedSection?
+	sectonRules=SectonRules
 	END;
 
-terminal SECTION_LABEL  returns ecore::EString:
-	'=' TEXT_VALUE '=';
-
-TaggedSection:
-	'@on' tag=STRING
-	sections+=Section+;
+SectonRules:
+	{SectonRules}
+	rules+=(TaggedRule | LayoutRule)+;
 
 LayoutRule:
-	ref=[Element] ':'
+	(ref=[Element] ':'
 	BEGIN
 	(references+=SpecsReference)+
 	(sections+=Section)*
+	END);
+
+TaggedRule:
+	name=SECTION_TAG
+	BEGIN
+	rule=LayoutRule
 	END;
 
 SpecsReference:
@@ -76,8 +76,20 @@ CssSelector:
 CssSelectorValue returns ecore::EString:
 	(CSSSELECTOR_VALUE | HTMLTAG_VALUE) (('>' | ',' | ':')? CSSSELECTOR_VALUE | HTMLTAG_VALUE)*;
 
-terminal QUALIFIED_FILENAME:
-	ID '.gspec';
+XpathSelector:
+	'xpath' value=XpathSelectorValue;
+
+XpathSelectorValue returns ecore::EString:
+	XPATH_VALUE;
+
+terminal SECTION_TAG returns ecore::EString:
+	'@on' TEXT_VALUE ;
+
+terminal SECTION_LABEL returns ecore::EString:
+	'=' TEXT_VALUE '=';
+
+terminal IMPORT_DEFINITION:
+	'@import' TEXT_VALUE;
 
 terminal HTMLTAG_VALUE returns ecore::EString:
 //PREFIXABLE_ID_START+
@@ -85,12 +97,6 @@ terminal HTMLTAG_VALUE returns ecore::EString:
 
 terminal CSSSELECTOR_VALUE returns ecore::EString:
 	('#' | '.' | ':') PREFIXABLE_ID_START ('a'..'z' | 'A'..'Z' | '_' | '-' | INT)+;
-
-XpathSelector:
-	'xpath' value=XpathSelectorValue;
-
-XpathSelectorValue returns ecore::EString:
-	XPATH_VALUE;
 
 terminal XPATH_VALUE returns ecore::EString:
 	'//' ('*' | ID) ('['->']')*;
@@ -108,8 +114,7 @@ terminal fragment NEW_LINE:
 	('\r'? '\n');
 
 terminal fragment TEXT_VALUE:
-	  ('a'..'z' | 'A'..'Z'| ' ') ('a'..'z' | 'A'..'Z' | ' ' | '.' | INT)*
-;
+	('a'..'z' | 'A'..'Z' | ' ') ('a'..'z' | 'A'..'Z' | ' ' | '.' | INT)*;
 	// The following synthetic tokens are used for the indentation-aware blocks
 terminal BEGIN:
 	'synthetic:BEGIN'; // increase indentation

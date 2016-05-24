@@ -13,6 +13,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import com.galenframework.tests.SpecsInjectorProvider
+import com.galenframework.specs.SimpleSpecsReference
+import com.galenframework.specs.LayoutRule
+
 @RunWith(XtextRunner)
 @InjectWith(SpecsInjectorProvider)
 class SpecsParsingTest{
@@ -43,11 +46,11 @@ class SpecsParsingTest{
 		val layoutSections = result.layoutCheckSection	
 		Assert.assertEquals(1,elements.size)
 		Assert.assertEquals(2,imports.size)
-		Assert.assertEquals("abc.gspec",imports.get(0).file)
-		Assert.assertEquals("other.gspec",imports.get(1).file)
+		Assert.assertEquals("@import abc.gspec",imports.get(0))
+		Assert.assertEquals("@import other.gspec",imports.get(1))
 		Assert.assertEquals(1,layoutSections.size)
 		val mainSection = layoutSections.get(0)
-		Assert.assertEquals(1,mainSection.rules.size)
+		Assert.assertEquals(1,mainSection.sectonRules.rules.size)
 		//Assert.assertNotNull(result.im)			
 
 
@@ -73,9 +76,9 @@ class SpecsParsingTest{
 		val layoutSections = result.layoutCheckSection
 		Assert.assertEquals(1,layoutSections.size)
 		val mainSection = layoutSections.get(0)
-		Assert.assertEquals(1,mainSection.rules.size)
-		val MainSectionElementRef = mainSection.rules.get(0)
-		Assert.assertEquals("navbar",MainSectionElementRef.ref.name)
+		Assert.assertEquals(1,mainSection.sectonRules.rules.size)
+		val mainSectionElementRef = mainSection.sectonRules.rules.get(0) as LayoutRule
+		Assert.assertEquals("navbar",mainSectionElementRef.ref.name)
 		/*
 		val objects = result.objects.elements
 		val sections = result.layoutCheckSection

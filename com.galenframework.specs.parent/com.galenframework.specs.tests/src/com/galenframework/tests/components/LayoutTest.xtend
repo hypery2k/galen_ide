@@ -12,43 +12,49 @@ import org.eclipse.xtext.junit4.util.ParseHelper
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import com.galenframework.services.SpecsGrammarAccess.SimpleSpecsReferenceElements
 import com.galenframework.specs.SimpleSpecsReference
-import com.galenframework.specs.SpecsReference
 import com.galenframework.specs.ComplexSpecsReference
+import com.galenframework.specs.LayoutRule
+import com.galenframework.specs.TaggedRule
 
 @RunWith(XtextRunner)
 @InjectWith(SpecsInjectorProvider)
-class LayoutTest{
+class LayoutTest {
 
 	@Inject
 	ParseHelper<Model> parseHelper;
 
-
 	@Test
 	def void shouldParseLayoutRuleTitleSimple() {
 		val result = parseHelper.parse('''
+			@objects
+				bootstrap-logo #id
+						
 			= Main =
-				bootstrap-logo:
-				    visible
+			bootstrap-logo:
+			    visible
 		''')
 		Assert.assertNotNull(result)
 		Assert.assertNotNull(result.layoutCheckSection)
 		val layoutSections = result.layoutCheckSection
-		Assert.assertEquals(1,layoutSections.size)
+		Assert.assertEquals(1, layoutSections.size)
 		val layoutSection = layoutSections.get(0)
-		Assert.assertEquals("= Main =",layoutSection.name)
-		Assert.assertEquals(1,layoutSection.rules.size)
-		Assert.assertEquals(1,layoutSection.rules.size)
-		val layoutRule = layoutSection.rules.get(0)
-		Assert.assertEquals(1,layoutRule.references.size)	
-		val layoutRuleSpec= layoutRule.references.get(0)
-		Assert.assertTrue(layoutRuleSpec instanceof SimpleSpecsReference)	
+		Assert.assertEquals("= Main =", layoutSection.name)
+		Assert.assertEquals(1, layoutSection.sectonRules.rules.size)
+
+		Assert.assertTrue(layoutSection.sectonRules.rules.get(0) instanceof LayoutRule)
+		val layoutRule = layoutSection.sectonRules.rules.get(0) as LayoutRule
+		Assert.assertEquals(1, layoutRule.references.size)
+		val layoutRuleSpec = layoutRule.references.get(0)
+		Assert.assertTrue(layoutRuleSpec instanceof SimpleSpecsReference)
 	}
-	
+
 	@Test
 	def void shouldParseLayoutRuleTitleSimpleWhitespace() {
 		val result = parseHelper.parse('''
+			@objects
+				bootstrap-logo #id
+				
 			= Main section =
 				bootstrap-logo:
 				    absent
@@ -56,21 +62,58 @@ class LayoutTest{
 		Assert.assertNotNull(result)
 		Assert.assertNotNull(result.layoutCheckSection)
 		val layoutSections = result.layoutCheckSection
-		Assert.assertEquals(1,layoutSections.size)
+		Assert.assertEquals(1, layoutSections.size)
 		val layoutSection = layoutSections.get(0)
-		Assert.assertEquals("= Main section =",layoutSection.name)	
-		Assert.assertEquals(1,layoutSection.rules.size)
-		val layoutRule = layoutSection.rules.get(0)
-		Assert.assertEquals(1,layoutRule.references.size)	
-		val layoutRuleSpec= layoutRule.references.get(0)
-		Assert.assertTrue(layoutRuleSpec instanceof SimpleSpecsReference)	
-		val simpleSpec = layoutRuleSpec as SimpleSpecsReference
-		Assert.assertEquals("absent",simpleSpec.value)	
+		Assert.assertEquals("= Main section =", layoutSection.name)
+		Assert.assertEquals(1, layoutSection.sectonRules.rules.size)
+		Assert.assertTrue(layoutSection.sectonRules.rules.get(0) instanceof LayoutRule)
+		val layoutRule = layoutSection.sectonRules.rules.get(0) as LayoutRule
+		Assert.assertTrue(layoutRule.references.get(0) instanceof SimpleSpecsReference)
+		val simpleSpec = layoutRule.references.get(0) as SimpleSpecsReference
+		Assert.assertEquals("absent", simpleSpec.value)
 	}
-	
+
+	@Test
+	def void shouldParseMultipleLayoutRules() {
+		val result = parseHelper.parse('''
+			@objects
+				bootstrap-logo #id
+				bootstrap-logo2 #id2
+				
+			= Main section =
+				bootstrap-logo:
+				    visible
+				    aligned horizontally top header
+				bootstrap-logo2:
+				    aligned horizontally top header
+		''')
+		Assert.assertNotNull(result)
+		Assert.assertNotNull(result.layoutCheckSection)
+		val layoutSections = result.layoutCheckSection
+		Assert.assertEquals(1, layoutSections.size)
+		val layoutSection = layoutSections.get(0)
+		Assert.assertEquals("= Main section =", layoutSection.name)
+		Assert.assertEquals(2, layoutSection.sectonRules.rules.size)
+		val layoutRuleLogo1 = layoutSection.sectonRules.rules.get(0) as LayoutRule
+		val layoutRuleLogo2 = layoutSection.sectonRules.rules.get(1) as LayoutRule
+
+		Assert.assertEquals(2, layoutRuleLogo1.references.size)
+		Assert.assertEquals(1, layoutRuleLogo2.references.size)
+		val layoutRuleLogo1Visible = layoutRuleLogo1.references.get(0)
+		Assert.assertTrue(layoutRuleLogo1Visible instanceof SimpleSpecsReference)
+		Assert.assertEquals("visible", (layoutRuleLogo1Visible as SimpleSpecsReference).value)
+		val layoutRuleLogo1Align = layoutRuleLogo1.references.get(1)
+		Assert.assertTrue(layoutRuleLogo1Align instanceof ComplexSpecsReference)
+		val layoutRuleLogo2Align = layoutRuleLogo2.references.get(0)
+		Assert.assertTrue(layoutRuleLogo2Align instanceof ComplexSpecsReference)
+	}
+
 	@Test
 	def void shouldParseMultipleRuleSpecs() {
 		val result = parseHelper.parse('''
+			@objects
+				bootstrap-logo #id
+				
 			= Main section =
 				bootstrap-logo:
 				    visible
@@ -79,20 +122,81 @@ class LayoutTest{
 		Assert.assertNotNull(result)
 		Assert.assertNotNull(result.layoutCheckSection)
 		val layoutSections = result.layoutCheckSection
-		Assert.assertEquals(1,layoutSections.size)
+		Assert.assertEquals(1, layoutSections.size)
 		val layoutSection = layoutSections.get(0)
-		Assert.assertEquals("= Main section =",layoutSection.name)	
-		Assert.assertEquals(1,layoutSection.rules.size)
-		val layoutRule = layoutSection.rules.get(0)
-		Assert.assertEquals(2,layoutRule.references.size)	
-		val layoutRuleSpec1= layoutRule.references.get(0)
-		val layoutRuleSpec2= layoutRule.references.get(1)
-		Assert.assertTrue(layoutRuleSpec1 instanceof SimpleSpecsReference)	
-		Assert.assertTrue(layoutRuleSpec2 instanceof ComplexSpecsReference)	
+		Assert.assertEquals("= Main section =", layoutSection.name)
+		Assert.assertEquals(1, layoutSection.sectonRules.rules.size)
+		val layoutRule = layoutSection.sectonRules.rules.get(0) as LayoutRule
+
+		Assert.assertEquals(2, layoutRule.references.size)
+		val layoutRuleSpec1 = layoutRule.references.get(0)
+		val layoutRuleSpec2 = layoutRule.references.get(1)
+		Assert.assertTrue(layoutRuleSpec1 instanceof SimpleSpecsReference)
+		Assert.assertTrue(layoutRuleSpec2 instanceof ComplexSpecsReference)
 		val simpleSpec = layoutRuleSpec1 as SimpleSpecsReference
-		Assert.assertEquals("visible",simpleSpec.value)	
-		val complexSpec = layoutRuleSpec2 as ComplexSpecsReference
+		Assert.assertEquals("visible", simpleSpec.value)
 	}
-	
+
+	@Test
+	def void shouldParseTaggedSection() {
+		val result = parseHelper.parse('''
+			@objects
+				bootstrap-logo #id
+				
+			= Main section = 
+			    @on mobile
+			    	bootstrap-logo:
+			    		absent
+		''')
+		Assert.assertNotNull(result)
+		Assert.assertNotNull(result.layoutCheckSection)
+		val layoutSections = result.layoutCheckSection
+		Assert.assertEquals(1, layoutSections.size)
+		val layoutSection = layoutSections.get(0)
+		Assert.assertEquals(1, layoutSection.sectonRules.rules.size)
+
+		Assert.assertNotNull(layoutSection.sectonRules.rules.get(0))
+		val taggedRule = layoutSection.sectonRules.rules.get(0) as TaggedRule
+		Assert.assertEquals("Tags", "@on mobile", taggedRule.name)
+	}
+
+	@Test
+	def void shouldParseWithTaggedSection() {
+		val result = parseHelper.parse('''
+				@objects
+				bootstrap-logo #id
+				
+			= Main section =
+				bootstrap-logo:
+				    visible
+			
+			    @on mobile
+			    	bootstrap-logo:
+			    		absent
+		''')
+		Assert.assertNotNull(result)
+		Assert.assertNotNull(result.layoutCheckSection)
+		val layoutSections = result.layoutCheckSection
+		Assert.assertEquals(1, layoutSections.size)
+		val layoutSection = layoutSections.get(0)
+		Assert.assertNotNull(layoutSection.sectonRules.rules)
+		Assert.assertNotNull(layoutSection.sectonRules.rules.get(0))
+		Assert.assertEquals("= Main section =", layoutSection.name)
+	/*
+	 * Assert.assertEquals(2,layoutSection.taggedSections.size)
+	 * 
+	 * Assert.assertTrue(layoutSection.rules.get(0) instanceof LayoutRule)	
+	 * Assert.assertTrue(layoutSection.rules.get(1) instanceof TaggedSection)	
+	 * val layoutRule = layoutSection.rules.get(0) as LayoutRule
+	 * val taggedSection = layoutSection.rules.get(1) as TaggedSection
+	 * 
+	 * Assert.assertTrue(layoutRule.references.get(0) instanceof SimpleSpecsReference)	
+	 * val simpleSpec = layoutRule.references.get(0) as SimpleSpecsReference
+	 * Assert.assertEquals("visible",simpleSpec.value)	
+	 * 
+	 * 
+	 * Assert.assertNotNull(taggedSection)
+	 Assert.assertEquals("Tags","@on mobile",taggedSection.name) */
+	}
 
 }
