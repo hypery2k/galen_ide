@@ -22,7 +22,7 @@
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipselabs.xtext.utils.unittesting.feature.feature.group" version="0.9.3.201204261440"/>
-<repository location="http://xtext-utils.eclipselabs.org.codespot.com/git.distribution/releases/unittesting-0.9.x"/>
+<repository location="https://martinreinhardt-online.de/update_sites/eclipselabs/xtext-utils/unittesting"/>
 </location>
 </locations>
 </target>

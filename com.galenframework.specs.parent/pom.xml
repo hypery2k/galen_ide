@@ -191,6 +191,14 @@
 		</pluginManagement>
 	</build>
 	<repositories>
+        <repository>
+          <id>mare-nexus</id>
+          <name>Own Nexus Repository</name>
+          <url>https://martinreinhardt-online.de/nexus/content/repositories/public/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+        </repository>
 		<repository>
 			<id>codehaus-snapshots</id>
 			<name>disable dead 'Codehaus Snapshots' repository, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=481478</name>
