@@ -194,7 +194,7 @@
         <repository>
           <id>mare-nexus</id>
           <name>Own Nexus Repository</name>
-          <url>https://martinreinhardt-online.de/nexus/content/repositories/public/</url>
+          <url>https://martinreinhardt-online.de/nexus/repository/public/</url>
           <releases>
             <enabled>true</enabled>
           </releases>
