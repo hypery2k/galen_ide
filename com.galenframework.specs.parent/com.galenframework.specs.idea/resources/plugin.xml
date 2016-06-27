@@ -9,6 +9,18 @@
 
 	<idea-version since-build="131"/>
 	<depends>org.eclipse.xtext.idea</depends>
+	
+	 <application-components>
+        <component>
+            <implementation-class>com.galenframework.idea.SpecsApplicationComponent</implementation-class>
+        </component>
+    </application-components>
+
+    <project-components>
+        <component>
+            <implementation-class>com.galenframework.idea.UpdateComponent</implementation-class>
+        </component>
+    </project-components>
 
 	<xi:include href="plugin_gen.xml" xpointer="xpointer(/idea-plugin/*)"/>
 </idea-plugin>
