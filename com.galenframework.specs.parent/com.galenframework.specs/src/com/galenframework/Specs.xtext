@@ -16,7 +16,8 @@ Objects:
 	END;
 
 Import:
-	IMPORT_DEFINITION;
+	'@import' fileName=ID
+	;
 
 Section:
 	name=SECTION_LABEL
@@ -88,9 +89,6 @@ terminal SECTION_TAG returns ecore::EString:
 terminal SECTION_LABEL returns ecore::EString:
 	'=' TEXT_VALUE '=';
 
-terminal IMPORT_DEFINITION:
-	'@import' TEXT_VALUE;
-
 terminal HTMLTAG_VALUE returns ecore::EString:
 //PREFIXABLE_ID_START+
 	('body' | 'br' | 'li' | 'a' | 'div' | 'span') (CSSSELECTOR_VALUE)?;
@@ -105,7 +103,7 @@ terminal SL_COMMENT:
 	'#' WS !('\n' | '\r')* NEW_LINE?;
 
 terminal ID returns ecore::EString:
-	PREFIXABLE_ID_START ('a'..'z' | 'A'..'Z' | '-' | '*' | INT)+;
+	PREFIXABLE_ID_START ('a'..'z' | 'A'..'Z' | '-' | '*' | '.' | INT)+;
 
 terminal fragment PREFIXABLE_ID_START:
 	('a'..'z' | 'A'..'Z');

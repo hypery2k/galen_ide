@@ -31,8 +31,8 @@ class LayoutTest {
 				bootstrap-logo #id
 						
 			= Main =
-			bootstrap-logo:
-			    visible
+				bootstrap-logo:
+			    	visible
 		''')
 		Assert.assertNotNull(result)
 		Assert.assertNotNull(result.layoutCheckSection)
