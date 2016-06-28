@@ -13,7 +13,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import com.galenframework.tests.SpecsInjectorProvider
-import com.galenframework.specs.SimpleSpecsReference
 import com.galenframework.specs.LayoutRule
 
 @RunWith(XtextRunner)
@@ -46,14 +45,11 @@ class SpecsParsingTest{
 		val layoutSections = result.layoutCheckSection	
 		Assert.assertEquals(1,elements.size)
 		Assert.assertEquals(2,imports.size)
-		Assert.assertEquals("@import abc.gspec",imports.get(0))
-		Assert.assertEquals("@import other.gspec",imports.get(1))
+		Assert.assertEquals("abc.gspec",imports.get(0).fileName)
+		Assert.assertEquals("other.gspec",imports.get(1).fileName)
 		Assert.assertEquals(1,layoutSections.size)
 		val mainSection = layoutSections.get(0)
 		Assert.assertEquals(1,mainSection.sectonRules.rules.size)
-		//Assert.assertNotNull(result.im)			
-
-
 	}
 	
 
