@@ -71,11 +71,11 @@
 			implementationClass="com.intellij.lang.PsiStructureViewFactory"
 		/>
 		<facetType implementation="com.galenframework.idea.facet.SpecsFacetType"/>
-      	<lang.documentationProvider 
-      		language="com.galenframework.Specs"
-      		factoryClass="com.galenframework.idea.SpecsExtensionFactory"
-      		implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"
-      	/>
+		<lang.documentationProvider 
+			language="com.galenframework.Specs"
+			factoryClass="com.galenframework.idea.SpecsExtensionFactory"
+			implementationClass="org.eclipse.xtext.idea.documentation.IdeaDocumentationProvider"
+		/>
 		<colorSettingsPage implementation="com.galenframework.idea.highlighting.SpecsColorSettingsPage"/>
 		<highlightVisitor implementation="com.galenframework.idea.highlighting.SpecsSemanticHighlightVisitor"/>
 
