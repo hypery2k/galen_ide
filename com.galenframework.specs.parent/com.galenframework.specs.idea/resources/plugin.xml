@@ -9,6 +9,7 @@
 
 	<idea-version since-build="131"/>
 	<depends>org.eclipse.xtext.idea</depends>
+  	<depends>com.intellij.modules.java</depends>
 	
 	 <application-components>
         <component>
