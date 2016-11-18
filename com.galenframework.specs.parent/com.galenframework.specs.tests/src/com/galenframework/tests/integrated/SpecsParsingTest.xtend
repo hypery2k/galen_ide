@@ -11,8 +11,8 @@ import org.eclipse.xtext.junit4.util.ParseHelper
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-
 import com.galenframework.tests.SpecsInjectorProvider
+import com.galenframework.specs.VisibilityRule
 import com.galenframework.specs.LayoutRule
 
 @RunWith(XtextRunner)
@@ -42,14 +42,14 @@ class SpecsParsingTest{
 		Assert.assertNotNull(result.importSection)
 		val elements = result.objects.elements	
 		val imports = result.importSection	
-		val layoutSections = result.layoutCheckSection	
+		val layoutSections = result.layoutChecks	
 		Assert.assertEquals(1,elements.size)
 		Assert.assertEquals(2,imports.size)
 		Assert.assertEquals("abc.gspec",imports.get(0).fileName)
 		Assert.assertEquals("other.gspec",imports.get(1).fileName)
 		Assert.assertEquals(1,layoutSections.size)
 		val mainSection = layoutSections.get(0)
-		Assert.assertEquals(1,mainSection.sectonRules.rules.size)
+		Assert.assertEquals(1,mainSection.generalRules.size)
 	}
 	
 
@@ -68,12 +68,12 @@ class SpecsParsingTest{
 		Assert.assertNotNull(result.objects.elements)		
 		val elementRef = result.objects.elements.get(0)
 		Assert.assertEquals("navbar",elementRef.name)
-		Assert.assertNotNull(result.layoutCheckSection)
-		val layoutSections = result.layoutCheckSection
+		Assert.assertNotNull(result.layoutChecks)
+		val layoutSections = result.layoutChecks
 		Assert.assertEquals(1,layoutSections.size)
 		val mainSection = layoutSections.get(0)
-		Assert.assertEquals(1,mainSection.sectonRules.rules.size)
-		val mainSectionElementRef = mainSection.sectonRules.rules.get(0) as LayoutRule
+		Assert.assertEquals(1,mainSection.generalRules.size)
+		val mainSectionElementRef = mainSection.generalRules.get(0) as LayoutRule
 		Assert.assertEquals("navbar",mainSectionElementRef.ref.name)
 		/*
 		val objects = result.objects.elements

@@ -7,33 +7,28 @@ Model:
 	{Model}
 	objects=Objects?
 	importSection+=Import*
-	layoutCheckSection+=Section*;
+	layoutChecks+=LayoutCheck*;
 
 Objects:
-	'@objects'
+	name='@objects'
 	BEGIN
 	(elements+=Element)+
 	END;
 
 Import:
-	'@import' fileName=ID
-	;
+	name='@import' fileName=ID;
 
-Section:
+LayoutCheck:
 	name=SECTION_LABEL
 	BEGIN
-	sectonRules=SectonRules
+	(generalRules+=LayoutRule)*
+	(taggedRules+=TaggedRule)*
 	END;
 
-SectonRules:
-	{SectonRules}
-	rules+=(TaggedRule | LayoutRule)+;
-
 LayoutRule:
-	(ref=[Element] ':'
+	((ref=[Element] ':')
 	BEGIN
 	(references+=SpecsReference)+
-	(sections+=Section)*
 	END);
 
 TaggedRule:
@@ -43,17 +38,27 @@ TaggedRule:
 	END;
 
 SpecsReference:
-	(SimpleSpecsReference | ComplexSpecsReference);
+	{SpecsReference} rule=Rule;
 
-SimpleSpecsReference:
-	value=('visible' | 'absent');
+Rule:
+	(VisibilityRule | PlacementRule | AlignmentRule | SizeRule);
 
-ComplexSpecsReference:
-	{ComplexSpecsReference} ((('near' | 'below' | 'above') INT 'to' INT 'px') |
-	('aligned horizontally' ('all' | 'top' | 'bottom' | 'centered') (ref=[Element])? (INT 'px')?) |
-	('aligned vertically' ('all' | 'left' | 'bottom' | 'right') (ref=[Element])? (INT 'px')?) |
-	('height' ('<' | '>') (INT 'px' | 'screen/height')) |
-	('width' ('<' | '>') (INT 'px' | 'screen/width@')));
+VisibilityRule:
+	{VisibilityRule} name=('visible' | 'absent');
+
+PlacementRule:
+	{PlacementRule} name=('near' | 'below' | 'above') INT 'to' INT 'px';
+
+SizeRule:
+	{SizeRule} ((name='height' ('<' | '>') (INT 'px' | 'screen/height')) |
+	(name='width' ('<' | '>') (INT 'px' | 'screen/width@')));
+
+AlignmentRule:
+	name='aligned' type=AlignmentType
+	ref=[Element] (INT 'px')?;
+
+AlignmentType:
+	('horizontally' ('all' | 'top' | 'bottom' | 'centered')) | ('vertically' ('all' | 'left' | 'bottom' | 'right'));
 
 Element returns Element:
 	{Element}
@@ -84,7 +89,7 @@ XpathSelectorValue returns ecore::EString:
 	XPATH_VALUE;
 
 terminal SECTION_TAG returns ecore::EString:
-	'@on' TEXT_VALUE ;
+	'@on' TEXT_VALUE;
 
 terminal SECTION_LABEL returns ecore::EString:
 	'=' TEXT_VALUE '=';

@@ -12,10 +12,10 @@ import org.eclipse.xtext.junit4.util.ParseHelper
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import com.galenframework.specs.SimpleSpecsReference
-import com.galenframework.specs.ComplexSpecsReference
 import com.galenframework.specs.LayoutRule
 import com.galenframework.specs.TaggedRule
+import com.galenframework.specs.VisibilityRule
+import com.galenframework.specs.AlignmentRule
 
 @RunWith(XtextRunner)
 @InjectWith(SpecsInjectorProvider)
@@ -35,18 +35,18 @@ class LayoutTest {
 			    	visible
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.layoutCheckSection)
-		val layoutSections = result.layoutCheckSection
+		Assert.assertNotNull(result.layoutChecks)
+		val layoutSections = result.layoutChecks
 		Assert.assertEquals(1, layoutSections.size)
 		val layoutSection = layoutSections.get(0)
 		Assert.assertEquals("= Main =", layoutSection.name)
-		Assert.assertEquals(1, layoutSection.sectonRules.rules.size)
+		Assert.assertEquals(1, layoutSection.generalRules.size)
 
-		Assert.assertTrue(layoutSection.sectonRules.rules.get(0) instanceof LayoutRule)
-		val layoutRule = layoutSection.sectonRules.rules.get(0) as LayoutRule
+		Assert.assertTrue(layoutSection.generalRules.get(0) instanceof LayoutRule)
+		val layoutRule = layoutSection.generalRules.get(0) as LayoutRule
 		Assert.assertEquals(1, layoutRule.references.size)
 		val layoutRuleSpec = layoutRule.references.get(0)
-		Assert.assertTrue(layoutRuleSpec instanceof SimpleSpecsReference)
+		Assert.assertTrue(layoutRuleSpec.rule instanceof VisibilityRule)
 	}
 
 	@Test
@@ -60,17 +60,17 @@ class LayoutTest {
 				    absent
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.layoutCheckSection)
-		val layoutSections = result.layoutCheckSection
+		Assert.assertNotNull(result.layoutChecks)
+		val layoutSections = result.layoutChecks
 		Assert.assertEquals(1, layoutSections.size)
 		val layoutSection = layoutSections.get(0)
 		Assert.assertEquals("= Main section =", layoutSection.name)
-		Assert.assertEquals(1, layoutSection.sectonRules.rules.size)
-		Assert.assertTrue(layoutSection.sectonRules.rules.get(0) instanceof LayoutRule)
-		val layoutRule = layoutSection.sectonRules.rules.get(0) as LayoutRule
-		Assert.assertTrue(layoutRule.references.get(0) instanceof SimpleSpecsReference)
-		val simpleSpec = layoutRule.references.get(0) as SimpleSpecsReference
-		Assert.assertEquals("absent", simpleSpec.value)
+		Assert.assertEquals(1, layoutSection.generalRules.size)
+		Assert.assertTrue(layoutSection.generalRules.get(0) instanceof LayoutRule)
+		val layoutRule = layoutSection.generalRules.get(0) as LayoutRule
+		Assert.assertTrue(layoutRule.references.get(0).rule  instanceof VisibilityRule)
+		val simpleSpec = layoutRule.references.get(0).rule  as VisibilityRule
+		Assert.assertEquals("absent", simpleSpec.name)
 	}
 
 	@Test
@@ -88,24 +88,24 @@ class LayoutTest {
 				    aligned horizontally top header
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.layoutCheckSection)
-		val layoutSections = result.layoutCheckSection
+		Assert.assertNotNull(result.layoutChecks)
+		val layoutSections = result.layoutChecks
 		Assert.assertEquals(1, layoutSections.size)
 		val layoutSection = layoutSections.get(0)
 		Assert.assertEquals("= Main section =", layoutSection.name)
-		Assert.assertEquals(2, layoutSection.sectonRules.rules.size)
-		val layoutRuleLogo1 = layoutSection.sectonRules.rules.get(0) as LayoutRule
-		val layoutRuleLogo2 = layoutSection.sectonRules.rules.get(1) as LayoutRule
+		Assert.assertEquals(2, layoutSection.generalRules.size)
+		val layoutRuleLogo1 = layoutSection.generalRules.get(0) as LayoutRule
+		val layoutRuleLogo2 = layoutSection.generalRules.get(1) as LayoutRule
 
 		Assert.assertEquals(2, layoutRuleLogo1.references.size)
 		Assert.assertEquals(1, layoutRuleLogo2.references.size)
 		val layoutRuleLogo1Visible = layoutRuleLogo1.references.get(0)
-		Assert.assertTrue(layoutRuleLogo1Visible instanceof SimpleSpecsReference)
-		Assert.assertEquals("visible", (layoutRuleLogo1Visible as SimpleSpecsReference).value)
+		Assert.assertTrue(layoutRuleLogo1Visible .rule instanceof VisibilityRule)
+		Assert.assertEquals("visible", (layoutRuleLogo1Visible.rule  as VisibilityRule).name)
 		val layoutRuleLogo1Align = layoutRuleLogo1.references.get(1)
-		Assert.assertTrue(layoutRuleLogo1Align instanceof ComplexSpecsReference)
+		Assert.assertTrue(layoutRuleLogo1Align.rule  instanceof AlignmentRule)
 		val layoutRuleLogo2Align = layoutRuleLogo2.references.get(0)
-		Assert.assertTrue(layoutRuleLogo2Align instanceof ComplexSpecsReference)
+		Assert.assertTrue(layoutRuleLogo2Align.rule  instanceof AlignmentRule)
 	}
 
 	@Test
@@ -120,21 +120,21 @@ class LayoutTest {
 				    aligned horizontally top header
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.layoutCheckSection)
-		val layoutSections = result.layoutCheckSection
+		Assert.assertNotNull(result.layoutChecks)
+		val layoutSections = result.layoutChecks
 		Assert.assertEquals(1, layoutSections.size)
 		val layoutSection = layoutSections.get(0)
 		Assert.assertEquals("= Main section =", layoutSection.name)
-		Assert.assertEquals(1, layoutSection.sectonRules.rules.size)
-		val layoutRule = layoutSection.sectonRules.rules.get(0) as LayoutRule
+		Assert.assertEquals(1, layoutSection.generalRules.size)
+		val layoutRule = layoutSection.generalRules.get(0) as LayoutRule
 
 		Assert.assertEquals(2, layoutRule.references.size)
 		val layoutRuleSpec1 = layoutRule.references.get(0)
 		val layoutRuleSpec2 = layoutRule.references.get(1)
-		Assert.assertTrue(layoutRuleSpec1 instanceof SimpleSpecsReference)
-		Assert.assertTrue(layoutRuleSpec2 instanceof ComplexSpecsReference)
-		val simpleSpec = layoutRuleSpec1 as SimpleSpecsReference
-		Assert.assertEquals("visible", simpleSpec.value)
+		Assert.assertTrue(layoutRuleSpec1.rule instanceof VisibilityRule)
+		Assert.assertTrue(layoutRuleSpec2.rule  instanceof AlignmentRule)
+		val simpleSpec = layoutRuleSpec1.rule  as VisibilityRule
+		Assert.assertEquals("visible", simpleSpec.name)
 	}
 
 	@Test
@@ -149,14 +149,14 @@ class LayoutTest {
 			    		absent
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.layoutCheckSection)
-		val layoutSections = result.layoutCheckSection
+		Assert.assertNotNull(result.layoutChecks)
+		val layoutSections = result.layoutChecks
 		Assert.assertEquals(1, layoutSections.size)
 		val layoutSection = layoutSections.get(0)
-		Assert.assertEquals(1, layoutSection.sectonRules.rules.size)
+		Assert.assertEquals(1, layoutSection.taggedRules.size)
 
-		Assert.assertNotNull(layoutSection.sectonRules.rules.get(0))
-		val taggedRule = layoutSection.sectonRules.rules.get(0) as TaggedRule
+		Assert.assertNotNull(layoutSection.taggedRules.get(0))
+		val taggedRule = layoutSection.taggedRules.get(0) as TaggedRule
 		Assert.assertEquals("Tags", "@on mobile", taggedRule.name)
 	}
 
@@ -175,12 +175,12 @@ class LayoutTest {
 			    		absent
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.layoutCheckSection)
-		val layoutSections = result.layoutCheckSection
+		Assert.assertNotNull(result.layoutChecks)
+		val layoutSections = result.layoutChecks
 		Assert.assertEquals(1, layoutSections.size)
 		val layoutSection = layoutSections.get(0)
-		Assert.assertNotNull(layoutSection.sectonRules.rules)
-		Assert.assertNotNull(layoutSection.sectonRules.rules.get(0))
+		Assert.assertNotNull(layoutSection.generalRules)
+		Assert.assertNotNull(layoutSection.generalRules.get(0))
 		Assert.assertEquals("= Main section =", layoutSection.name)
 	/*
 	 * Assert.assertEquals(2,layoutSection.taggedSections.size)
