@@ -37,6 +37,10 @@ Workflow {
 		language = StandardLanguage {
 			name = "com.galenframework.Specs"
 			fileExtensions = "gspec"
+			
+			formatter = {
+				generateStub = true
+			}
 
 			serializer = {
 				generateStub = false
