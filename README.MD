@@ -36,7 +36,11 @@ Download [Xtext Eclipse Beta](https://www.eclipse.org/Xtext/news.html#download-l
 
 #### Update Site
 
-Plugin is available via [nightly channel](https://plugins.jetbrains.com/plugin/8302). The latest working build is published there.
+Plugin is available via [nightly channel](https://plugins.jetbrains.com/plugin/8302). The latest working build is published there. The plugin is compatible with:
+* IntelliJ IDEA 
+* IntelliJ IDEA Community Edition
+* Rider  
+* Android Studio
 
 #### build
 ```bash
