@@ -10,24 +10,24 @@ buildscript {
 
 subprojects {
 	ext.mwe2Version = '2.8.3'
-	ext.xtextVersion = '2.11.0'
+	ext.xtextVersion = '2.10.0'
 	repositories {
 		jcenter()
 	}
-	
+
 	apply plugin: 'java'
 	apply plugin: 'org.xtext.xtend'
 	apply from: "${rootDir}/gradle/source-layout.gradle"
 	apply from: "${rootDir}/gradle/maven-deployment.gradle"
 	apply plugin: 'eclipse'
 	apply plugin: 'idea'
-	
+
 	group = 'com.galenframework.specs'
 	version = '1.0.0-SNAPSHOT'
-	
+
 	sourceCompatibility = '1.8'
 	targetCompatibility = '1.8'
-	
+
 	configurations.all {
 		exclude group: 'asm'
 	}
