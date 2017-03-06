@@ -9,7 +9,7 @@ plugins {
 }
 
 intellij {
-  plugins "code editing"
+  version "2016.3"
   pluginName "Galen Specs Language Support"
 
   publish {
