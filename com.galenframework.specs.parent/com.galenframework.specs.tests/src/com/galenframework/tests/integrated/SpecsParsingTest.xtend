@@ -14,6 +14,7 @@ import org.junit.runner.RunWith
 import com.galenframework.tests.SpecsInjectorProvider
 import com.galenframework.specs.VisibilityRule
 import com.galenframework.specs.LayoutRule
+import com.galenframework.specs.Element
 
 @RunWith(XtextRunner)
 @InjectWith(SpecsInjectorProvider)
@@ -50,6 +51,9 @@ class SpecsParsingTest{
 		Assert.assertEquals(1,layoutSections.size)
 		val mainSection = layoutSections.get(0)
 		Assert.assertEquals(1,mainSection.generalRules.size)
+		val layoutRule = mainSection.generalRules.get(0) as LayoutRule
+		val elementRef = layoutRule.applyTo as Element
+		Assert.assertEquals("navbar",elementRef.name)
 	}
 	
 
@@ -66,15 +70,16 @@ class SpecsParsingTest{
 		''')
 		Assert.assertNotNull(result)
 		Assert.assertNotNull(result.objects.elements)		
-		val elementRef = result.objects.elements.get(0)
-		Assert.assertEquals("navbar",elementRef.name)
+		val element = result.objects.elements.get(0)
+		Assert.assertEquals("navbar",element.name)
 		Assert.assertNotNull(result.layoutChecks)
 		val layoutSections = result.layoutChecks
 		Assert.assertEquals(1,layoutSections.size)
 		val mainSection = layoutSections.get(0)
 		Assert.assertEquals(1,mainSection.generalRules.size)
-		val mainSectionElementRef = mainSection.generalRules.get(0) as LayoutRule
-		Assert.assertEquals("navbar",mainSectionElementRef.ref.name)
+		val layoutRule = mainSection.generalRules.get(0) as LayoutRule
+		val elementRef = layoutRule.applyTo as Element
+		Assert.assertEquals("navbar",elementRef.name)
 		/*
 		val objects = result.objects.elements
 		val sections = result.layoutCheckSection

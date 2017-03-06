@@ -3,6 +3,12 @@
  */
 package com.galenframework.scoping
 
+import org.eclipse.emf.ecore.EReference
+import org.eclipse.emf.ecore.EObject
+import com.galenframework.specs.Element
+import com.galenframework.specs.SpecsPackage
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.scoping.Scopes
 
 /**
  * This class contains custom scoping description.
@@ -12,4 +18,17 @@ package com.galenframework.scoping
  */
 class SpecsScopeProvider extends AbstractSpecsScopeProvider {
 
+	override getScope(EObject context, EReference reference) {
+		// We want to define the Scope for the Element's superElement cross-reference
+		if (context instanceof Element && reference == SpecsPackage.Literals.LAYOUT_RULE__APPLY_TO) {
+			// Collect a list of candidates by going through the model
+			// EcoreUtil2 provides useful functionality to do that
+			// For example searching for all elements within the root Object's tree
+			val rootElement = EcoreUtil2.getRootContainer(context)
+			val candidates = EcoreUtil2.getAllContentsOfType(rootElement, Element)
+			// Create IEObjectDescriptions and puts them into an IScope instance
+			return Scopes.scopeFor(candidates)
+		}
+		return super.getScope(context, reference);
+	}
 }

@@ -10,13 +10,13 @@ Model:
 	layoutChecks+=LayoutCheck*;
 
 Objects:
-	name='@objects'
+	'@objects'
 	BEGIN
 	(elements+=Element)+
 	END;
 
 Import:
-	name='@import' fileName=ID;
+	'@import' fileName=ID;
 
 LayoutCheck:
 	name=SECTION_LABEL
@@ -26,10 +26,10 @@ LayoutCheck:
 	END;
 
 LayoutRule:
-	((ref=[Element] ':')
+	applyTo=[Element] ':'
 	BEGIN
 	(references+=SpecsReference)+
-	END);
+	END;
 
 TaggedRule:
 	name=SECTION_TAG

@@ -24,15 +24,6 @@ class ObjectsTest {
 	ParseHelper<Model> parseHelper;
 
 	// NEGATIVE TESTS
-	@Test
-	def void shouldNotloadObjectFromEmptyObjectDefinition() {
-		val result = parseHelper.parse('''
-			# objects
-			@objects
-		''')
-		assertNotNull(result)
-		assertNull(result.objects)
-	}
 
 	@Test
 	def void shouldNotLoadAllObjectWithMixedIndentation() {
@@ -50,6 +41,15 @@ class ObjectsTest {
 	}
 
 	// POSITIVE TESTS	
+	@Test
+	def void shouldLoadObjectFromEmptyObjectDefinition() {
+		val result = parseHelper.parse('''
+			# objects
+			@objects
+		''')
+		assertNotNull(result)
+		assertNull(result.objects)
+	}
 	@Test
 	def void shouldParsePartlyModels() {
 		val result = parseHelper.parse('''
