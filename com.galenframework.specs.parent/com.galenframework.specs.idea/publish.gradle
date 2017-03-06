@@ -1,16 +1,12 @@
 buildscript {
   repositories {
-    maven {
-      url "https://plugins.gradle.org/m2/"
-    }
-  }
-  dependencies {
-    classpath 'gradle.plugin.org.jetbrains:gradle-intellij-plugin:0.0.43'
+    maven { url 'http://dl.bintray.com/jetbrains/intellij-plugin-service' }
   }
 }
 
-apply plugin: 'org.jetbrains.intellij'
-
+plugins {
+  id "org.jetbrains.intellij" version "0.2.5"
+}
 
 intellij {
   plugins "code editing"
@@ -21,5 +17,5 @@ intellij {
     password publishPassword
     pluginId '8302'
     channel !release?'beta':''
-  } 
+  }
 }

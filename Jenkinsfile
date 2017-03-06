@@ -21,37 +21,51 @@ stepsForParallel['deployEclipse'] = transformIntoStep('Galen_IDE/deployEclipse')
 stepsForParallel['deployWeb'] = transformIntoStep('Galen_IDE/deployWeb')
 
 node {
-  env.JAVA_HOME = tool 'JDK8'
+  def buildUrl = env.BUILD_URL
+  def buildNumber = env.BUILD_NUMBER
+  def workspace = env.WORKSPACE
   def mvnHome = tool 'Maven'
+  env.JAVA_HOME = tool 'JDK8'
   env.PATH = "${env.JAVA_HOME}/bin:${mvnHome}/bin:${env.PATH}"
 
-  stage('Clean workspace') {
-    deleteDir()
-  }
+  // PRINT ENVIRONMENT TO JOB
+  echo "workspace directory is $workspace"
+  echo "build URL is $buildUrl"
+  echo "build Number is $buildNumber"
+  echo "PATH is $env.PATH"
 
-  stage('Checkout') {
-    git url: 'https://github.com/hypery2k/galen_ide.git'
-  }
-
-  stage('Build') {
-    sh "cd com.galenframework.specs.parent && ${mvnHome}/bin/mvn clean package -U"
-    sh "cd com.galenframework.specs.parent && ./gradlew clean build"
-    sh "cd com.galenframework.specs.parent/com.galenframework.specs.idea && ./gradlew clean build"
-  }
-
-  stage('Test') {
-    wrap([$class: 'Xvfb']) {
-    sh "metacity --sm-disable --replace & cd com.galenframework.specs.parent && ${mvnHome}/bin/mvn verify"
-    sh "metacity --sm-disable --replace & cd com.galenframework.specs.parent && ./gradlew test"
-    step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
-    step([$class: 'JUnitResultArchiver', testResults: 'com.galenframework.specs.parent/*/target/surefire-reports/TEST*.xml'])
+  try {
+    stage('Clean workspace') {
+      deleteDir()
     }
-  }
 
-  stage('Deploy') {
-    // Actually run the steps in parallel - parallel takes a map as an argument,
-    // hence the above.
-    parallel stepsForParallel
-  }
+    stage('Checkout') {
+      git url: 'https://github.com/hypery2k/galen_ide.git'
+    }
 
+    stage('Build') {
+      sh "cd com.galenframework.specs.parent && ${mvnHome}/bin/mvn clean package -U"
+      sh "cd com.galenframework.specs.parent && ./gradlew clean build"
+      sh "cd com.galenframework.specs.parent/com.galenframework.specs.idea && ./gradlew clean build"
+    }
+
+    stage('Test') {
+      wrap([$class: 'Xvfb']) {
+      sh "metacity --sm-disable --replace & cd com.galenframework.specs.parent && ${mvnHome}/bin/mvn verify"
+      sh "metacity --sm-disable --replace & cd com.galenframework.specs.parent && ./gradlew test"
+      step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
+      step([$class: 'JUnitResultArchiver', testResults: 'com.galenframework.specs.parent/*/target/surefire-reports/TEST*.xml'])
+      }
+    }
+
+    stage('Deploy') {
+      // Actually run the steps in parallel - parallel takes a map as an argument,
+      // hence the above.
+      parallel stepsForParallel
+    }
+
+  } catch (e) {
+    mail subject: "${env.JOB_NAME} (${env.BUILD_NUMBER}): Error on build", to: 'github@martinreinhardt-online.de', body: "Please go to ${env.BUILD_URL}."
+    throw e
+  }
 }
