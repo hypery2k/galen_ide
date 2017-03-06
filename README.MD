@@ -10,13 +10,13 @@ Vote on [`Kickstarter`](https://www.kickstarter.com/projects/1453417775/14874275
 
 
 > Feel free to donate
-> 
+>
 > <a href='http://www.pledgie.com/campaigns/27462'><img alt='Click here to lend your support to: Galen IDE and make a donation at www.pledgie.com !' src='http://www.pledgie.com/campaigns/27462.png?skin_name=chrome' border='0' /></a> <a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=345EFPLG3PGZU">
 > <img alt="" border="0" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif"/>
 > </img></a>
 > Or donate [Bitcoins](bitcoin:3NKtxw1SRYgess5ev4Ri54GekoAgkR213D):
 > [![Bitcoin](https://martinreinhardt-online.de/bitcoin.png)](bitcoin:3NKtxw1SRYgess5ev4Ri54GekoAgkR213D)
-> 
+>
 > Also via [greenaddress](https://greenaddress.it/pay/GA3ZPfh7As3Gc2oP6pQ1njxMij88u/)
 
 ## Try it out
@@ -37,15 +37,14 @@ Download [Xtext Eclipse Beta](https://www.eclipse.org/Xtext/news.html#download-l
 #### Update Site
 
 Plugin is available via [nightly channel](https://plugins.jetbrains.com/plugin/8302). The latest working build is published there. The plugin is compatible with:
-* IntelliJ IDEA 
+* IntelliJ IDEA
 * IntelliJ IDEA Community Edition
-* Rider  
+* Rider
 * Android Studio
 
 #### build
 ```bash
-cd com.galenframework.layout.spec
-cd com.galenframework.layout.spec.idea
+cd com.galenframework.specs.parent/com.galenframework.specs.idea
 ./gradlew runIdea
 ````
 ![](docs/screenshots/idea.png)
@@ -53,5 +52,3 @@ cd com.galenframework.layout.spec.idea
 ### Web
 
 Preview is available [here](https://martinreinhardt-online.de/galen_ide/).
-
-See 

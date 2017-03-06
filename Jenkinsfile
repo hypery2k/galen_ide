@@ -36,6 +36,7 @@ node {
   stage('Build') {
     sh "cd com.galenframework.specs.parent && ${mvnHome}/bin/mvn clean package -U"
     sh "cd com.galenframework.specs.parent && ./gradlew clean build"
+    sh "cd com.galenframework.specs.parent/com.galenframework.specs.idea && ./gradlew clean build"
   }
 
   stage('Test') {
