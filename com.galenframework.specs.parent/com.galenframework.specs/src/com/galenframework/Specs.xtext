@@ -21,7 +21,8 @@ Groups:
 	'@groups'
 	BEGIN
 	(groupEntries+=GroupEntry)+
-	END;
+	END
+	;
 
 Import:
 	'@import' fileName=ID;
@@ -34,7 +35,7 @@ LayoutCheck:
 	END;
 
 LayoutRule:
-	applyTo=[Element|STRING] ':'
+	applyTo=[Element] ':'
 	BEGIN
 	(references+=SpecsReference)+
 	END;
