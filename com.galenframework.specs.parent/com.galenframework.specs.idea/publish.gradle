@@ -16,6 +16,6 @@ intellij {
     username publishUsername
     password publishPassword
     pluginId '8302'
-    channel !release?'beta':''
+    channel release.toBoolean()?'':'canary'
   }
 }
