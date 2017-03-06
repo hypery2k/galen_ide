@@ -40,9 +40,9 @@ class SpecsParsingTest{
 		''')
 		Assert.assertNotNull(result)
 		Assert.assertNotNull(result.objects.elements)
-		Assert.assertNotNull(result.importSection)
+		Assert.assertNotNull(result.imports)
 		val elements = result.objects.elements	
-		val imports = result.importSection	
+		val imports = result.imports	
 		val layoutSections = result.layoutChecks	
 		Assert.assertEquals(1,elements.size)
 		Assert.assertEquals(2,imports.size)

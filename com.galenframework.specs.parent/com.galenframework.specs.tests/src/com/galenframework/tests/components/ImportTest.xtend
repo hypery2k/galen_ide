@@ -26,8 +26,8 @@ class ImportTest {
 			@import file.gspec
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.importSection)
-		val imports = result.importSection
+		Assert.assertNotNull(result.imports)
+		val imports = result.imports
 		Assert.assertEquals(1, imports.size)
 		val importFile = imports.get(0)
 		Assert.assertEquals("file.gspec", importFile.fileName)
@@ -40,8 +40,8 @@ class ImportTest {
 			@import file2.gspec
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.importSection)
-		val imports = result.importSection
+		Assert.assertNotNull(result.imports)
+		val imports = result.imports
 		Assert.assertEquals(2, imports.size)
 		Assert.assertEquals("file1.gspec", imports.get(0).fileName)
 		Assert.assertEquals("file2.gspec", imports.get(1).fileName)

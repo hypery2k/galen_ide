@@ -20,7 +20,7 @@ class SpecsFormatter extends AbstractFormatter2 {
 	def dispatch void format(Model model, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
 		model.getObjects.format;
-		for (Import importSection : model.getImportSection()) {
+		for (Import importSection : model.imports) {
 			importSection.format;
 		}
 		for (LayoutCheck layoutChecks : model.getLayoutChecks()) {

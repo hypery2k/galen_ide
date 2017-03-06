@@ -6,13 +6,21 @@ generate specs "http://www.galenframework.com/Specs"
 Model:
 	{Model}
 	objects=Objects?
-	importSection+=Import*
+	imports+=Import*
+	groups=Groups?
+	imports+=Import*
 	layoutChecks+=LayoutCheck*;
 
 Objects:
 	'@objects'
 	BEGIN
 	(elements+=Element)+
+	END;
+	
+Groups:
+	'@groups'
+	BEGIN
+	(groupEntries+=GroupEntry)+
 	END;
 
 Import:
@@ -26,7 +34,7 @@ LayoutCheck:
 	END;
 
 LayoutRule:
-	applyTo=[Element] ':'
+	applyTo=[Element|STRING] ':'
 	BEGIN
 	(references+=SpecsReference)+
 	END;
@@ -59,6 +67,11 @@ AlignmentRule:
 
 AlignmentType:
 	('horizontally' ('all' | 'top' | 'bottom' | 'centered')) | ('vertically' ('all' | 'left' | 'bottom' | 'right'));
+
+GroupEntry returns GroupEntry:
+	{GroupEntry}
+	name=ID consistsOf+=[Element] (','consistsOf+=[Element])*
+;
 
 Element returns Element:
 	{Element}
