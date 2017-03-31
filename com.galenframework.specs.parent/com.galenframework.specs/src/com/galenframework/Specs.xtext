@@ -35,10 +35,20 @@ LayoutCheck:
 	END;
 
 LayoutRule:
-	applyTo=[Element] ':'
+	applyTo=ApplyReference':'
 	BEGIN
 	(references+=SpecsReference)+
 	END;
+	
+ApplyReference returns SpecReference:
+	ElementEntryReference|'&'GroupEntryReference
+;
+ElementEntryReference returns GroupEntryReference:
+	elementEntryReference=[Element]
+;
+GroupEntryReference returns GroupEntryReference:
+	groupEntryReference=[GroupEntry]
+;
 
 TaggedRule:
 	name=SECTION_TAG
