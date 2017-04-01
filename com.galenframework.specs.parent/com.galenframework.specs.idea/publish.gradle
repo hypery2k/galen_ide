@@ -12,6 +12,10 @@ intellij {
   version "2016.3"
   pluginName "Galen Specs Language Support"
 
+  patchPluginXml {
+	untilBuild supportedVersionUntil
+  }
+  
   publish {
     username publishUsername
     password publishPassword

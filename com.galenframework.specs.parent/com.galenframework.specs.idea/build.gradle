@@ -41,7 +41,7 @@ task plugin(type: Exec, dependsOn: 'prepareRepository') {
 
 task publish(type: Exec, dependsOn: 'prepareRepository') {
   executable "sh"
-  args "-c", "cp gradle.properties ${buildDir}/publish/ && cp publish.gradle ${buildDir}/publish/build.gradle && cd ${buildDir}/publish && ../../gradlew publishPlugin -Prelease=\"${release}\" -PpublishUsername=\"${publishUsername}\" -PpublishPassword=\"${publishPassword}\" --stacktrace"
+  args "-c", "cp gradle.properties ${buildDir}/publish/ && cp publish.gradle ${buildDir}/publish/build.gradle && cd ${buildDir}/publish && ../../gradlew publishPlugin -Pversion=\"${version}-build${buildNo}\" -Prelease=\"${release}\" -PpublishUsername=\"${publishUsername}\" -PpublishPassword=\"${publishPassword}\" --stacktrace"
 }
 
 ideaRepository.rootUrl = "${buildDir}/ideaRepository"
