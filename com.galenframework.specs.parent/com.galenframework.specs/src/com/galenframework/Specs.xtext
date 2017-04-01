@@ -43,7 +43,7 @@ LayoutRule:
 ApplyReference returns SpecReference:
 	ElementEntryReference|'&'GroupEntryReference
 ;
-ElementEntryReference returns GroupEntryReference:
+ElementEntryReference returns ElementEntryReference:
 	elementEntryReference=[Element]
 ;
 GroupEntryReference returns GroupEntryReference:

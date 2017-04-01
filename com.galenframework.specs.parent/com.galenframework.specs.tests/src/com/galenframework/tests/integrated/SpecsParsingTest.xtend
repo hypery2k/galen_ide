@@ -15,6 +15,7 @@ import com.galenframework.tests.SpecsInjectorProvider
 import com.galenframework.specs.VisibilityRule
 import com.galenframework.specs.LayoutRule
 import com.galenframework.specs.Element
+import com.galenframework.specs.ElementEntryReference
 
 @RunWith(XtextRunner)
 @InjectWith(SpecsInjectorProvider)
@@ -52,7 +53,8 @@ class SpecsParsingTest{
 		val mainSection = layoutSections.get(0)
 		Assert.assertEquals(1,mainSection.generalRules.size)
 		val layoutRule = mainSection.generalRules.get(0) as LayoutRule
-		val elementRef = layoutRule.applyTo as Element
+		val applyToRef = layoutRule.applyTo as ElementEntryReference
+		val elementRef = applyToRef.elementEntryReference
 		Assert.assertEquals("navbar",elementRef.name)
 	}
 	
@@ -78,7 +80,8 @@ class SpecsParsingTest{
 		val mainSection = layoutSections.get(0)
 		Assert.assertEquals(1,mainSection.generalRules.size)
 		val layoutRule = mainSection.generalRules.get(0) as LayoutRule
-		val elementRef = layoutRule.applyTo as Element
+		val applyToRef = layoutRule.applyTo as ElementEntryReference
+		val elementRef = applyToRef.elementEntryReference
 		Assert.assertEquals("navbar",elementRef.name)
 		/*
 		val objects = result.objects.elements
