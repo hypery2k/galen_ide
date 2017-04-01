@@ -16,6 +16,7 @@ import com.galenframework.specs.VisibilityRule
 import com.galenframework.specs.LayoutRule
 import com.galenframework.specs.Element
 import com.galenframework.specs.ElementEntryReference
+import com.galenframework.specs.GroupEntryReference
 
 @RunWith(XtextRunner)
 @InjectWith(SpecsInjectorProvider)
@@ -56,6 +57,40 @@ class SpecsParsingTest{
 		val applyToRef = layoutRule.applyTo as ElementEntryReference
 		val elementRef = applyToRef.elementEntryReference
 		Assert.assertEquals("navbar",elementRef.name)
+	}
+	
+	@Test
+	def void shouldParseSpecWithImportAndGroups() {
+		val result = parseHelper.parse('''
+			# objects
+			@objects
+			  navbar  .navbar-header
+			@groups
+			  navigation navbar  
+			@import abc.gspec
+			@import other.gspec
+			  
+			= Main section =
+			  &navigation:
+			    visible
+		''')
+		Assert.assertNotNull(result)
+		Assert.assertNotNull(result.objects.elements)
+		Assert.assertNotNull(result.imports)
+		val elements = result.objects.elements	
+		val imports = result.imports	
+		val layoutSections = result.layoutChecks	
+		Assert.assertEquals(1,elements.size)
+		Assert.assertEquals(2,imports.size)
+		Assert.assertEquals("abc.gspec",imports.get(0).fileName)
+		Assert.assertEquals("other.gspec",imports.get(1).fileName)
+		Assert.assertEquals(1,layoutSections.size)
+		val mainSection = layoutSections.get(0)
+		Assert.assertEquals(1,mainSection.generalRules.size)
+		val layoutRule = mainSection.generalRules.get(0) as LayoutRule
+		val applyToRef = layoutRule.applyTo as GroupEntryReference
+		val grouptRef = applyToRef.groupEntryReference
+		Assert.assertEquals("navigation",grouptRef.name)
 	}
 	
 
