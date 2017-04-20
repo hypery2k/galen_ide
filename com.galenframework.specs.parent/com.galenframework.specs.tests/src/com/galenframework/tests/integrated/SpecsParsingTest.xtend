@@ -17,14 +17,14 @@ import com.galenframework.specs.LayoutRule
 import com.galenframework.specs.Element
 import com.galenframework.specs.ElementEntryReference
 import com.galenframework.specs.GroupEntryReference
+import org.eclipse.xtext.xbase.formatting2.ObjectEntry
 
 @RunWith(XtextRunner)
 @InjectWith(SpecsInjectorProvider)
-class SpecsParsingTest{
+class SpecsParsingTest {
 
 	@Inject
 	ParseHelper<Model> parseHelper;
-
 
 	@Test
 	def void shouldParseSpecWithImport() {
@@ -43,22 +43,95 @@ class SpecsParsingTest{
 		Assert.assertNotNull(result)
 		Assert.assertNotNull(result.objects.elements)
 		Assert.assertNotNull(result.imports)
-		val elements = result.objects.elements	
-		val imports = result.imports	
-		val layoutSections = result.layoutChecks	
-		Assert.assertEquals(1,elements.size)
-		Assert.assertEquals(2,imports.size)
-		Assert.assertEquals("abc.gspec",imports.get(0).fileName)
-		Assert.assertEquals("other.gspec",imports.get(1).fileName)
-		Assert.assertEquals(1,layoutSections.size)
+		val elements = result.objects.elements
+		val imports = result.imports
+		val layoutSections = result.layoutChecks
+		Assert.assertEquals(1, elements.size)
+		Assert.assertEquals(2, imports.size)
+		Assert.assertEquals("abc.gspec", imports.get(0).fileName)
+		Assert.assertEquals("other.gspec", imports.get(1).fileName)
+		Assert.assertEquals(1, layoutSections.size)
 		val mainSection = layoutSections.get(0)
-		Assert.assertEquals(1,mainSection.generalRules.size)
+		Assert.assertEquals(1, mainSection.generalRules.size)
 		val layoutRule = mainSection.generalRules.get(0) as LayoutRule
 		val applyToRef = layoutRule.applyTo as ElementEntryReference
 		val elementRef = applyToRef.elementEntryReference
-		Assert.assertEquals("navbar",elementRef.name)
+		Assert.assertEquals("navbar", elementRef.name)
+	}
+
+	@Test
+	def void shouldParseSpecWithGroups() {
+		val result = parseHelper.parse('''
+			# objects
+			@objects
+			  navbar  .navbar-header
+			@groups
+			  navigation navbar  
+			@import abc.gspec
+			@import other.gspec
+			  
+			= Main section =
+			  &navigation:
+			  	absent
+			  	visible
+		''')
+		Assert.assertNotNull(result)
+		Assert.assertNotNull(result.objects.elements)
+		Assert.assertNotNull(result.imports)
+		val elements = result.objects.elements
+		val imports = result.imports
+		val layoutSections = result.layoutChecks
+		Assert.assertEquals(1, elements.size)
+		Assert.assertEquals(2, imports.size)
+		Assert.assertEquals("abc.gspec", imports.get(0).fileName)
+		Assert.assertEquals("other.gspec", imports.get(1).fileName)
+		Assert.assertEquals(1, layoutSections.size)
+		val mainSection = layoutSections.get(0)
+		Assert.assertEquals(1, mainSection.generalRules.size)
+		val layoutRuleOne = mainSection.generalRules.get(0) as LayoutRule
+		val grouptRef = (layoutRuleOne.applyTo as GroupEntryReference).groupEntryReference
+		Assert.assertEquals("navigation", grouptRef.name)
 	}
 	
+	
+	@Test
+	def void shouldParseSpecWithMultipleRules() {
+		val result = parseHelper.parse('''
+			# objects
+			@objects
+			  navbar  .navbar-header
+			  navbar2  .navbar-header
+			  
+			@import abc.gspec
+			@import other.gspec
+			  
+			= Main section =
+			  navbar:
+			    visible
+			  navbar2:
+			  	visible
+		''')
+		Assert.assertNotNull(result)
+		Assert.assertNotNull(result.objects.elements)
+		Assert.assertNotNull(result.imports)
+		val elements = result.objects.elements
+		val imports = result.imports
+		val layoutSections = result.layoutChecks
+		Assert.assertEquals(2, elements.size)
+		Assert.assertEquals(2, imports.size)
+		Assert.assertEquals("abc.gspec", imports.get(0).fileName)
+		Assert.assertEquals("other.gspec", imports.get(1).fileName)
+		Assert.assertEquals(1, layoutSections.size)
+		val mainSection = layoutSections.get(0)
+		Assert.assertEquals(2, mainSection.generalRules.size)
+		val layoutRule1 = mainSection.generalRules.get(0) as LayoutRule
+		val elementRef1 = (layoutRule1.applyTo as ElementEntryReference).elementEntryReference
+		Assert.assertEquals("navbar", elementRef1.name)
+		val layoutRule2 = mainSection.generalRules.get(1) as LayoutRule
+		val elementRef2 = (layoutRule2.applyTo as ElementEntryReference).elementEntryReference
+		Assert.assertEquals("navbar2", elementRef2.name)
+	}
+
 	@Test
 	def void shouldParseSpecWithImportAndGroups() {
 		val result = parseHelper.parse('''
@@ -71,28 +144,33 @@ class SpecsParsingTest{
 			@import other.gspec
 			  
 			= Main section =
+			  navbar:
+			  	absent
+			 	visible
 			  &navigation:
-			    visible
+			  	absent
+			  	visible
 		''')
 		Assert.assertNotNull(result)
 		Assert.assertNotNull(result.objects.elements)
 		Assert.assertNotNull(result.imports)
-		val elements = result.objects.elements	
-		val imports = result.imports	
-		val layoutSections = result.layoutChecks	
-		Assert.assertEquals(1,elements.size)
-		Assert.assertEquals(2,imports.size)
-		Assert.assertEquals("abc.gspec",imports.get(0).fileName)
-		Assert.assertEquals("other.gspec",imports.get(1).fileName)
-		Assert.assertEquals(1,layoutSections.size)
+		val elements = result.objects.elements
+		val imports = result.imports
+		val layoutSections = result.layoutChecks
+		Assert.assertEquals(1, elements.size)
+		Assert.assertEquals(2, imports.size)
+		Assert.assertEquals("abc.gspec", imports.get(0).fileName)
+		Assert.assertEquals("other.gspec", imports.get(1).fileName)
+		Assert.assertEquals(2, layoutSections.size)
 		val mainSection = layoutSections.get(0)
-		Assert.assertEquals(1,mainSection.generalRules.size)
-		val layoutRule = mainSection.generalRules.get(0) as LayoutRule
-		val applyToRef = layoutRule.applyTo as GroupEntryReference
-		val grouptRef = applyToRef.groupEntryReference
-		Assert.assertEquals("navigation",grouptRef.name)
+		Assert.assertEquals(1, mainSection.generalRules.size)
+		val layoutRuleOne = mainSection.generalRules.get(0) as LayoutRule
+		val elementRef = (layoutRuleOne.applyTo as ElementEntryReference).elementEntryReference
+		Assert.assertEquals("navbar", elementRef.name)
+		val layoutRuleTwo = mainSection.generalRules.get(1) as LayoutRule
+		val grouptRef = (layoutRuleTwo.applyTo as GroupEntryReference).groupEntryReference
+		Assert.assertEquals("navigation", grouptRef.name)
 	}
-	
 
 	@Test
 	def void loadPassSimpleSpec() {
@@ -106,32 +184,31 @@ class SpecsParsingTest{
 			    visible
 		''')
 		Assert.assertNotNull(result)
-		Assert.assertNotNull(result.objects.elements)		
+		Assert.assertNotNull(result.objects.elements)
 		val element = result.objects.elements.get(0)
-		Assert.assertEquals("navbar",element.name)
+		Assert.assertEquals("navbar", element.name)
 		Assert.assertNotNull(result.layoutChecks)
 		val layoutSections = result.layoutChecks
-		Assert.assertEquals(1,layoutSections.size)
+		Assert.assertEquals(1, layoutSections.size)
 		val mainSection = layoutSections.get(0)
-		Assert.assertEquals(1,mainSection.generalRules.size)
+		Assert.assertEquals(1, mainSection.generalRules.size)
 		val layoutRule = mainSection.generalRules.get(0) as LayoutRule
 		val applyToRef = layoutRule.applyTo as ElementEntryReference
 		val elementRef = applyToRef.elementEntryReference
-		Assert.assertEquals("navbar",elementRef.name)
-		/*
-		val objects = result.objects.elements
-		val sections = result.layoutCheckSection
-		Assert.assertTrue("Should read one object definition, but was " + objects.size, objects.size == 1)
-		Assert.assertTrue("Should read one object layout check section, but was " + sections.size, sections.size == 1)
-		val object = objects.get(0)
-		Assert.assertTrue("Should read CSS selector type, but was " + object.selector,
-			object.selector.equalsIgnoreCase(".navbar-header"))
-		val section = sections.get(0)
-		Assert.assertTrue("Should get correct name, but was " + section.name,
-			section.name.equalsIgnoreCase("Main section"))
-		Assert.assertTrue("Should get correct element reference, but was " + section.ref.name,
-			section.ref.name.equalsIgnoreCase("navbar")) */
-
+		Assert.assertEquals("navbar", elementRef.name)
+	/*
+	 * val objects = result.objects.elements
+	 * val sections = result.layoutCheckSection
+	 * Assert.assertTrue("Should read one object definition, but was " + objects.size, objects.size == 1)
+	 * Assert.assertTrue("Should read one object layout check section, but was " + sections.size, sections.size == 1)
+	 * val object = objects.get(0)
+	 * Assert.assertTrue("Should read CSS selector type, but was " + object.selector,
+	 * 	object.selector.equalsIgnoreCase(".navbar-header"))
+	 * val section = sections.get(0)
+	 * Assert.assertTrue("Should get correct name, but was " + section.name,
+	 * 	section.name.equalsIgnoreCase("Main section"))
+	 * Assert.assertTrue("Should get correct element reference, but was " + section.ref.name,
+	 section.ref.name.equalsIgnoreCase("navbar")) */
 	}
 
 }
