@@ -35,19 +35,19 @@ LayoutCheck:
 	END;
 
 LayoutRule:
-	applyTo=ApplyReference':'
+	applyTo=EntryReference':'
 	BEGIN
 	(references+=SpecsReference)+
 	END;
 	
-ApplyReference returns SpecReference:
-	ElementEntryReference|'&'GroupEntryReference
+EntryReference returns SpecElementEntryReference:
+	ElementEntryReference|GroupEntryReference
 ;
 ElementEntryReference returns ElementEntryReference:
 	elementEntryReference=[Element]
 ;
 GroupEntryReference returns GroupEntryReference:
-	groupEntryReference=[GroupEntry]
+	'&'groupEntryReference=[GroupEntry]
 ;
 
 TaggedRule:
@@ -127,7 +127,8 @@ terminal CSSSELECTOR_VALUE returns ecore::EString:
 
 terminal XPATH_VALUE returns ecore::EString:
 	'//' ('*' | ID) ('['->']')*;
-	// Single line comment
+
+// Single line comment
 terminal SL_COMMENT:
 	'#' WS !('\n' | '\r')* NEW_LINE?;
 
@@ -142,7 +143,8 @@ terminal fragment NEW_LINE:
 
 terminal fragment TEXT_VALUE:
 	('a'..'z' | 'A'..'Z' | ' ') ('a'..'z' | 'A'..'Z' | ' ' | '.' | INT)*;
-	// The following synthetic tokens are used for the indentation-aware blocks
+
+// The following synthetic tokens are used for the indentation-aware blocks
 terminal BEGIN:
 	'synthetic:BEGIN'; // increase indentation
 terminal END:

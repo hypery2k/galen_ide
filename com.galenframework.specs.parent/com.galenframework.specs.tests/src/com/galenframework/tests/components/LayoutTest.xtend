@@ -109,6 +109,37 @@ class LayoutTest {
 	}
 
 	@Test
+	def void shouldParseGroups() {
+		val result = parseHelper.parse('''
+			@objects
+				bootstrap-logo #id
+				
+			@groups
+			  	navigation bootstrap-logo  
+			= Main section =
+				&navigation:
+				    visible
+				    aligned horizontally top header
+		''')
+		Assert.assertNotNull(result)
+		Assert.assertNotNull(result.layoutChecks)
+		val layoutSections = result.layoutChecks
+		Assert.assertEquals(1, layoutSections.size)
+		val layoutSection = layoutSections.get(0)
+		Assert.assertEquals("= Main section =", layoutSection.name)
+		Assert.assertEquals(1, layoutSection.generalRules.size)
+		val layoutRule = layoutSection.generalRules.get(0) as LayoutRule
+
+		Assert.assertEquals(2, layoutRule.references.size)
+		val layoutRuleSpec1 = layoutRule.references.get(0)
+		val layoutRuleSpec2 = layoutRule.references.get(1)
+		Assert.assertTrue(layoutRuleSpec1.rule instanceof VisibilityRule)
+		Assert.assertTrue(layoutRuleSpec2.rule  instanceof AlignmentRule)
+		val simpleSpec = layoutRuleSpec1.rule  as VisibilityRule
+		Assert.assertEquals("visible", simpleSpec.name)
+	}
+
+	@Test
 	def void shouldParseMultipleRuleSpecs() {
 		val result = parseHelper.parse('''
 			@objects
@@ -126,6 +157,40 @@ class LayoutTest {
 		val layoutSection = layoutSections.get(0)
 		Assert.assertEquals("= Main section =", layoutSection.name)
 		Assert.assertEquals(1, layoutSection.generalRules.size)
+		val layoutRule = layoutSection.generalRules.get(0) as LayoutRule
+
+		Assert.assertEquals(2, layoutRule.references.size)
+		val layoutRuleSpec1 = layoutRule.references.get(0)
+		val layoutRuleSpec2 = layoutRule.references.get(1)
+		Assert.assertTrue(layoutRuleSpec1.rule instanceof VisibilityRule)
+		Assert.assertTrue(layoutRuleSpec2.rule  instanceof AlignmentRule)
+		val simpleSpec = layoutRuleSpec1.rule  as VisibilityRule
+		Assert.assertEquals("visible", simpleSpec.name)
+	}
+	
+	
+
+	@Test
+	def void shouldParseMultipleRuleSpecsAndMultipleRules() {
+		val result = parseHelper.parse('''
+			@objects
+				bootstrap-logo #id
+				bootstrap-logo2 #id2
+				
+			= Main section =
+				bootstrap-logo:
+				    visible
+				    aligned horizontally top header
+				bootstrap-logo2:
+				    absent
+		''')
+		Assert.assertNotNull(result)
+		Assert.assertNotNull(result.layoutChecks)
+		val layoutSections = result.layoutChecks
+		Assert.assertEquals(1, layoutSections.size)
+		val layoutSection = layoutSections.get(0)
+		Assert.assertEquals("= Main section =", layoutSection.name)
+		Assert.assertEquals(2, layoutSection.generalRules.size)
 		val layoutRule = layoutSection.generalRules.get(0) as LayoutRule
 
 		Assert.assertEquals(2, layoutRule.references.size)

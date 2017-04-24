@@ -146,9 +146,7 @@ class SpecsParsingTest {
 			= Main section =
 			  navbar:
 			  	absent
-			 	visible
 			  &navigation:
-			  	absent
 			  	visible
 		''')
 		Assert.assertNotNull(result)
@@ -161,9 +159,9 @@ class SpecsParsingTest {
 		Assert.assertEquals(2, imports.size)
 		Assert.assertEquals("abc.gspec", imports.get(0).fileName)
 		Assert.assertEquals("other.gspec", imports.get(1).fileName)
-		Assert.assertEquals(2, layoutSections.size)
+		Assert.assertEquals(1, layoutSections.size)
 		val mainSection = layoutSections.get(0)
-		Assert.assertEquals(1, mainSection.generalRules.size)
+		Assert.assertEquals(2, mainSection.generalRules.size)
 		val layoutRuleOne = mainSection.generalRules.get(0) as LayoutRule
 		val elementRef = (layoutRuleOne.applyTo as ElementEntryReference).elementEntryReference
 		Assert.assertEquals("navbar", elementRef.name)
