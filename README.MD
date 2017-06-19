@@ -42,6 +42,9 @@ Plugin is available via [canary channel](https://plugins.jetbrains.com/plugin/83
 * Rider
 * Android Studio
 
+To install the Canary Release add the following repository manually:
+`https://plugins.jetbrains.com/plugins/canary/list`
+
 #### build
 ```bash
 cd com.galenframework.specs.parent/com.galenframework.specs.idea
