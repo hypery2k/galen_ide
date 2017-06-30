@@ -7,7 +7,7 @@
 	<version>1.0.0</version>
 	<vendor>Martin Reinhardt</vendor>
 
-	<idea-version since-build="131"/>
+	<idea-version since-build="145"/>
 	<depends>org.eclipse.xtext.idea</depends>
   	<depends>com.intellij.modules.java</depends>
 	

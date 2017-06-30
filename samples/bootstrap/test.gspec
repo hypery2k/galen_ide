@@ -1,0 +1,19 @@
+@objects
+    bootstrap-logo #id
+    search-panel #id
+
+@groups
+    navigation bootstrap-logo
+
+= Main section =
+    bootstrap-logo:
+        absent
+
+    @on mobile
+        search-panel:
+            aligned horizontally all search-panel
+            absent
+
+    &navigation:
+        visible
+        aligned horizontally top header
