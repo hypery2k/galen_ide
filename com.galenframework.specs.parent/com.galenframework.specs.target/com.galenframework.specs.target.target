@@ -21,8 +21,8 @@
 <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/releases/2.9.2/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipselabs.xtext.utils.unittesting.feature.feature.group" version="0.9.3.201204261440"/>
-<repository location="https://martinreinhardt-online.de/update_sites/eclipselabs/xtext-utils/unittesting"/>
+<unit id="com.itemis.xtext.testing.feature.feature.group" version="0.2.0.201612011358"/>
+<repository location="https://dl.bintray.com/itemis/generic/xtext-testing/updates/"/>
 </location>
 </locations>
 </target>

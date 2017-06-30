@@ -1,8 +1,8 @@
 package com.galenframework.tests;
 
 import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipselabs.xtext.utils.unittesting.XtextRunner2;
-import org.eclipselabs.xtext.utils.unittesting.XtextTest;
+import com.itemis.xtext.testing.XtextRunner2;
+import com.itemis.xtext.testing.XtextTest;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
