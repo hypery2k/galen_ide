@@ -30,14 +30,15 @@ Import:
 LayoutCheck:
 	name=SECTION_LABEL
 	BEGIN
-	(generalRules+=LayoutRule)*
-	(taggedRules+=TaggedRule)*
+	(
+		(generalRules+=LayoutRule)|(taggedRules+=TaggedRule)
+	)+
 	END;
 
 LayoutRule:
 	applyTo=EntryReference':'
 	BEGIN
-	(references+=SpecsReference)+
+	(specifications+=SpecsReference)+
 	END;
 	
 EntryReference returns SpecElementEntryReference:
