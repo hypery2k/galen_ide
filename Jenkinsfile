@@ -51,19 +51,23 @@ node {
       checkout scm
     }
 
-    stage('Build') {
-      sh "cd com.galenframework.specs.parent && ${mvnHome}/bin/mvn clean package -U"
-      sh "cd com.galenframework.specs.parent && ./gradlew clean build"
-      sh "cd com.galenframework.specs.parent/com.galenframework.specs.idea && ./gradlew clean build"
-    }
+    dir('com.galenframework.specs.parent') {
 
-    stage('Test') {
-      wrap([$class: 'Xvfb']) {
-      sh "metacity --sm-disable --replace & cd com.galenframework.specs.parent && ${mvnHome}/bin/mvn verify"
-      sh "metacity --sm-disable --replace & cd com.galenframework.specs.parent && ./gradlew test"
-      step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
-      step([$class: 'JUnitResultArchiver', testResults: 'com.galenframework.specs.parent/*/target/surefire-reports/TEST*.xml'])
+      stage('Build') {
+        sh "${mvnHome}/bin/mvn clean package -U"
+        sh "./gradlew clean build"
+        sh "cd com.galenframework.specs.idea && ./gradlew clean build"
       }
+
+      stage('Test') {
+        wrap([$class: 'Xvfb']) {
+        sh "metacity --sm-disable --replace & ${mvnHome}/bin/mvn verify"
+        sh "metacity --sm-disable --replace & ./gradlew test"
+        step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
+        step([$class: 'JUnitResultArchiver', testResults: '*/target/surefire-reports/TEST*.xml'])
+        }
+      }
+
     }
 
     if (git.isDevelopBranch()){
