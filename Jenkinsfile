@@ -1,3 +1,8 @@
+properties properties: [
+  [$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '30', numToKeepStr: '10']],
+  disableConcurrentBuilds()
+]
+
 import jenkins.model.*
 
  // Take the string and echo it.
@@ -43,7 +48,7 @@ node {
     }
 
     stage('Checkout') {
-      git url: 'https://github.com/hypery2k/galen_ide.git'
+      checkout scm
     }
 
     stage('Build') {
