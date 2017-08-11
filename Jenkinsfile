@@ -20,6 +20,9 @@ stepsForParallel['deployIDEA'] = transformIntoStep('Galen_IDE/deployIDEA')
 stepsForParallel['deployEclipse'] = transformIntoStep('Galen_IDE/deployEclipse')
 stepsForParallel['deployWeb'] = transformIntoStep('Galen_IDE/deployWeb')
 
+@Library('mare-build-library')
+def git = new de.mare.ci.jenkins.Git()
+
 node {
   def buildUrl = env.BUILD_URL
   def buildNumber = env.BUILD_NUMBER
@@ -58,10 +61,12 @@ node {
       }
     }
 
-    stage('Deploy') {
-      // Actually run the steps in parallel - parallel takes a map as an argument,
-      // hence the above.
-      parallel stepsForParallel
+    if (git.isDevelopBranch()){
+      stage('Deploy') {
+        // Actually run the steps in parallel - parallel takes a map as an argument,
+        // hence the above.
+        parallel stepsForParallel
+      }
     }
 
   } catch (e) {
