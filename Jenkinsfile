@@ -13,7 +13,6 @@ import jenkins.model.*
   // that explicitly, or use { -> } syntax.
   return {
    // Job parameters can be added to this step
-   build jobFullName
    build job: jobFullName, parameters: [booleanParam(name: 'release', value: false), [$class: 'GitParameterValue', name: 'branchName', value: branchName]]
   }
  }
@@ -73,19 +72,6 @@ node {
     }
 
     if (git.isDevelopBranch()){
-
-      parallel(
-        'deploy IDEA': {
-          sh "fastlane supply --apk target/LS_build${buildNumber}.apk --json_key ~/.holisticon/playstore.json --package_name de.holisticon.app.ls --track alpha"
-        },
-        'deploy Eclipse': {
-          sh "fastlane pilot upload --skip_waiting_for_build_processing true --ipa target/LS_build${buildNumber}.ipa"
-        },
-        'deploy Web': {
-          sh "fastlane pilot upload --skip_waiting_for_build_processing true --ipa target/LS_build${buildNumber}.ipa"
-        },
-        failFast: false
-      )
       stage('Deploy') {
         // Actually run the steps in parallel - parallel takes a map as an argument,
         // hence the above.
