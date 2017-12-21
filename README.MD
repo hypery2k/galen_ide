@@ -3,7 +3,7 @@
 Vote on [`Kickstarter`](https://www.kickstarter.com/projects/1453417775/1487427501) for the project.
 
 [![Build Status](https://travis-ci.org/hypery2k/galen_ide.svg?branch=master)](https://travis-ci.org/hypery2k/galen_ide)
-[![Build Status](https://martinreinhardt-online.de/jenkins/buildStatus/icon?job=Galen/galen_ide_build)](https://martinreinhardt-online.de/jenkins/blue/organizations/jenkins/Galen%2Fgalen_ide_build/branches/)
+[![Build Status](https://martinreinhardt-online.de/jenkins/buildStatus/icon?job=Galen/galen_ide_build/master)](https://martinreinhardt-online.de/jenkins/blue/organizations/jenkins/Galen%2Fgalen_ide_build/branches/)
 [![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=mreinhardt&url=https://github.com/hypery2k/galen_ide&title=badges&language=&tags=github&category=software)
 
 > Integration for Web, Eclipse and IDEA development environement for the [GalenFramework](http://galenframework.com)
@@ -14,8 +14,8 @@ Vote on [`Kickstarter`](https://www.kickstarter.com/projects/1453417775/14874275
 > <a href='http://www.pledgie.com/campaigns/27462'><img alt='Click here to lend your support to: Galen IDE and make a donation at www.pledgie.com !' src='http://www.pledgie.com/campaigns/27462.png?skin_name=chrome' border='0' /></a> <a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=345EFPLG3PGZU">
 > <img alt="" border="0" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_donateCC_LG.gif"/>
 > </img></a>
-> Or donate [Bitcoins](bitcoin:3NKtxw1SRYgess5ev4Ri54GekoAgkR213D):
-> [![Bitcoin](https://martinreinhardt-online.de/bitcoin.png)](bitcoin:3NKtxw1SRYgess5ev4Ri54GekoAgkR213D)
+> Or donate [Bitcoins](bitcoin:3CNDEGjhbDxGScBtJYMibRNykRH2wXSLY9):
+> [![Bitcoin](https://martinreinhardt-online.de/bitcoin.png)](bitcoin:3CNDEGjhbDxGScBtJYMibRNykRH2wXSLY9)
 >
 > Also via [greenaddress](https://greenaddress.it/pay/GA3ZPfh7As3Gc2oP6pQ1njxMij88u/)
 
