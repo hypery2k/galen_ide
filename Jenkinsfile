@@ -6,7 +6,7 @@ properties properties: [
 import jenkins.model.*
 
  // Take the string and echo it.
- def transformIntoStep(jobFullName) {
+ def transformIntoStep(jobFullName, branchName) {
   // We need to wrap what we return in a Groovy closure, or else it's invoked
   // when this method is called, not when we pass it to parallel.
   // To do this, you need to wrap the code below in { }, and either return
@@ -14,16 +14,9 @@ import jenkins.model.*
   return {
    // Job parameters can be added to this step
    build jobFullName
+   build job: jobFullName, parameters: [booleanParam(name: 'release', value: false), [$class: 'GitParameterValue', name: 'branchName', value: branchName]]
   }
  }
-
-// While you can't use Groovy's .collect or similar methods currently, you can
-// still transform a list into a set of actual build steps to be executed in
-// parallel.
-def stepsForParallel = [: ]
-stepsForParallel['deployIDEA'] = transformIntoStep('Galen_IDE/deployIDEA')
-stepsForParallel['deployEclipse'] = transformIntoStep('Galen_IDE/deployEclipse')
-stepsForParallel['deployWeb'] = transformIntoStep('Galen_IDE/deployWeb')
 
 @Library('mare-build-library')
 def git = new de.mare.ci.jenkins.Git()
@@ -31,10 +24,19 @@ def git = new de.mare.ci.jenkins.Git()
 node {
   def buildUrl = env.BUILD_URL
   def buildNumber = env.BUILD_NUMBER
+  def branchName = env.BRANCH_NAME
   def workspace = env.WORKSPACE
   def mvnHome = tool 'Maven'
   env.JAVA_HOME = tool 'JDK8'
   env.PATH = "${env.JAVA_HOME}/bin:${mvnHome}/bin:${env.PATH}"
+  
+  // While you can't use Groovy's .collect or similar methods currently, you can
+  // still transform a list into a set of actual build steps to be executed in
+  // parallel.
+  def stepsForParallel = [: ]
+  stepsForParallel['deployIDEA'] = transformIntoStep('Galen_IDE/deployIDEA', branchName)
+  stepsForParallel['deployEclipse'] = transformIntoStep('Galen_IDE/deployEclipse', branchName)
+  stepsForParallel['deployWeb'] = transformIntoStep('Galen_IDE/deployWeb', branchName)
 
   // PRINT ENVIRONMENT TO JOB
   echo "workspace directory is $workspace"
@@ -71,6 +73,19 @@ node {
     }
 
     if (git.isDevelopBranch()){
+
+      parallel(
+        'deploy IDEA': {
+          sh "fastlane supply --apk target/LS_build${buildNumber}.apk --json_key ~/.holisticon/playstore.json --package_name de.holisticon.app.ls --track alpha"
+        },
+        'deploy Eclipse': {
+          sh "fastlane pilot upload --skip_waiting_for_build_processing true --ipa target/LS_build${buildNumber}.ipa"
+        },
+        'deploy Web': {
+          sh "fastlane pilot upload --skip_waiting_for_build_processing true --ipa target/LS_build${buildNumber}.ipa"
+        },
+        failFast: false
+      )
       stage('Deploy') {
         // Actually run the steps in parallel - parallel takes a map as an argument,
         // hence the above.
