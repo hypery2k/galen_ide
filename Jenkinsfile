@@ -25,10 +25,7 @@ node {
   def buildNumber = env.BUILD_NUMBER
   def branchName = env.BRANCH_NAME
   def workspace = env.WORKSPACE
-  def mvnHome = tool 'Maven'
-  env.JAVA_HOME = tool 'JDK8'
-  env.PATH = "${env.JAVA_HOME}/bin:${mvnHome}/bin:${env.PATH}"
-  
+
   // While you can't use Groovy's .collect or similar methods currently, you can
   // still transform a list into a set of actual build steps to be executed in
   // parallel.
@@ -55,14 +52,14 @@ node {
     dir('com.galenframework.specs.parent') {
 
       stage('Build') {
-        sh "${mvnHome}/bin/mvn clean package -U"
+        sh "./mvnw clean package -U"
         sh "./gradlew clean build"
         sh "cd com.galenframework.specs.idea && ./gradlew clean build"
       }
 
       stage('Test') {
         wrap([$class: 'Xvfb']) {
-        sh "metacity --sm-disable --replace & ${mvnHome}/bin/mvn verify"
+        sh "metacity --sm-disable --replace & ./mvnw verify"
         sh "metacity --sm-disable --replace & ./gradlew test"
         step([$class: 'ArtifactArchiver', artifacts: '**/target/*.jar', fingerprint: true])
         step([$class: 'JUnitResultArchiver', testResults: '*/target/surefire-reports/TEST*.xml'])
