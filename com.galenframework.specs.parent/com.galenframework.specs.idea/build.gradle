@@ -8,7 +8,7 @@ dependencies {
 }
 
 ideaDevelopment {
-	ideaVersion = '171.4694.23'
+	ideaVersion = '182.5107.41'
 	pluginRepositories {
 		url "http://download.eclipse.org/modeling/tmf/xtext/idea/${xtextVersion}/updatePlugins.xml"
 	}

@@ -7,7 +7,7 @@
 	<version>1.0.0</version>
 	<vendor>Martin Reinhardt</vendor>
 
-	<idea-version since-build="163" until-build="173.*"/>
+	<idea-version since-build="163"/>
 	<depends>org.eclipse.xtext.idea</depends>
 
 	<xi:include href="plugin_gen.xml" xpointer="xpointer(/idea-plugin/*)"/>
